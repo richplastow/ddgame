@@ -1,0 +1,58 @@
+/* FONTS */
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+pre, tt, code, kbd, samp, var {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+
+
+
+/* COLOURS */
+
+.container {
+    background: #fff;
+}
+h1, h2, .h1, .h2 {
+    color: #993300;
+    filter: hue-rotate(0) saturate(200%);
+}
+a {
+    color: #993300;
+    filter: hue-rotate(0) saturate(200%);
+    transition: filter 1s;
+}
+a:hover {
+    color: #993300; /* override bootstrap */
+    filter: hue-rotate(-90deg) saturate(100%);
+}
+
+
+
+
+/* TYPOGRAPHY */
+
+h1, h2, .h1, .h2 {
+    font-weight: bold;
+}
+h3, h4, .h3, .h4 {
+    margin-top: 1em;
+}
+
+
+
+
+/* UTILITY */
+
+.hid {
+    display: none;
+}
+.nopad {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.rr {
+    text-align: right;
+}
