@@ -1,0 +1,36 @@
+/* COLOR FOR game.html */
+
+html, body {
+    background: #000;
+}
+
+
+
+
+/* BUTTONS */
+
+.game-button {
+    background: #e0c;
+    color: #ddd;
+    transition: background-color 0.2s, color 0.3s;
+}
+.game-button:hover {
+    background: #f0e;
+    color: #fff;
+}
+.game-button:active {
+    background: #c0a;
+    color: #fff;
+}
+.game-button:focus {
+    box-shadow: #fff 0 0 1vh;
+}
+
+
+
+
+/* SQUARE */
+
+.game-square {
+    background: #c0a;
+}

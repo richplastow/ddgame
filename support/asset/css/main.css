@@ -53,6 +53,9 @@ h3, h4, .h3, .h4 {
     padding: 0 !important;
     margin: 0 !important;
 }
-.rr {
+.tar {
     text-align: right;
+}
+.vab {
+    vertical-align: bottom;
 }
