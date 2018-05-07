@@ -4,6 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow: hidden;
 }
 .game-table {
     display: table;
@@ -26,6 +27,10 @@ html, body {
     display: inline-block;
     text-align: center;
     cursor: pointer;
+    width: 20vmin;
+    height: 20vmin;
+    border-radius: 2vmin;
+    font-size: 8vmin;
 }
 
 
@@ -34,15 +39,15 @@ html, body {
 /* LEFT-RIGHT BUTTONS */
 
 .left-right.game-buttons .game-table-cell {
-    height: 24vh;
+    height: 24vmin;
     vertical-align: middle;
 }
 .left.game-buttons .game-table-cell {
-    padding-left: 2vh;
+    padding-left: 2vmin;
     text-align: left;
 }
 .right.game-buttons .game-table-cell {
-    padding-right: 2vh;
+    padding-right: 2vmin;
     text-align: right;
 }
 .left-right.game-buttons .game-buttons-gap {
@@ -56,12 +61,6 @@ html, body {
     .game-table-row.game-buttons-gap {
         display: none;
     }
-    .game-button {
-        width: 20vh;
-        height: 20vh;
-        border-radius: 2vh;
-        font-size: 8vh;
-    }
 }
 
 /* eg iPad landscape. In future, use something like: */
@@ -73,16 +72,16 @@ html, body {
     and (orientation: landscape)
 {
     .left-right.game-buttons .game-table-cell {
-        height: 18vh;
+        height: 18vmin;
     }
     .left-right.game-buttons .game-buttons-gap {
         height: auto;
     }
     .game-button {
-        width: 14vh;
-        height: 14vh;
-        border-radius: 1.5vh;
-        font-size: 6vh;
+        width: 14vmin;
+        height: 14vmin;
+        border-radius: 1.5vmin;
+        font-size: 6vmin;
     }
 }
 
@@ -95,13 +94,13 @@ html, body {
     height: auto;
 }
 .bottom {
-    height: 48vw;
+    height: 48vmin;
 }
 .bottom .game-table {
-    height: 24vw;
+    height: 24vmin;
 }
 .bottom .game-table-cell {
-    padding-top: 2vw;
+    padding-top: 2vmin;
     text-align: center;
 }
 .ipad-portrait {
@@ -111,12 +110,6 @@ html, body {
 @media screen and (orientation: portrait) {
     .left-right.game-buttons {
         display: none;
-    }
-    .game-button {
-        width: 20vw;
-        height: 20vw;
-        border-radius: 2vw;
-        font-size: 8vw;
     }
 }
 
@@ -129,16 +122,16 @@ html, body {
     and (orientation: portrait)
 {
     .bottom {
-        height: 16vw;
+        height: 16vmin;
     }
     .bottom .game-table {
-        height: 16vw;
+        height: 16vmin;
     }
     .game-button {
-        width: 12vw;
-        height: 12vw;
-        border-radius: 1.25vw;
-        font-size: 5vw;
+        width: 12vmin;
+        height: 12vmin;
+        border-radius: 1.25vmin;
+        font-size: 5vmin;
     }
     .ipad-portrait {
         display: table-cell;
@@ -163,27 +156,27 @@ html, body {
 
 @media screen and (orientation: landscape) {
     .game-square-wrap {
-        width: 100vh;
-        height: 100vh;
-        min-width: 100vh;
-        padding: 1vh 0 0 0;
+        width: 100vmin;
+        height: 100vmin;
+        min-width: 100vmin;
+        padding: 1vmin 0 0 0;
     }
     .game-square {
-        width: 96vh;
-        height: 96vh;
-        border-radius: 2vh;
+        width: 96vmin;
+        height: 96vmin;
+        border-radius: 2vmin;
     }
 }
 
 @media screen and (orientation: portrait) {
     .game-square-wrap {
-        width: 100vw;
-        height: 100vw;
-        padding: 1vh 0 0 0;
+        width: 100vmin;
+        height: 100vmin;
+        padding: 1vmin 0 0 0;
     }
     .game-square {
-        width: 96vw;
-        height: 96vw;
-        border-radius: 2vw;
+        width: 96vmin;
+        height: 96vmin;
+        border-radius: 2vmin;
     }
 }

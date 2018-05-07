@@ -15,7 +15,7 @@
             maximum-scale=1.0, user-scalable=no">
 
 <!-- Search engine meta -->
-<title>Play Moossical 0.0.2</title>
+<title>Play Moossical 0.0.3</title>
 <meta name="description"
    content="A simple and creative multiplayer online music game">
 <link rel="author" href="README.md">
@@ -30,7 +30,7 @@
 <meta property="og:url"      content="http://moossical.loop.coop/">
 <!-- @TODO
 <meta property="og:image"
-       content="http://moossical.loop.coop/support/asset/logo/logo-1200x900.svg">-->
+       content="http://moossical.loop.coop/asset/logo/logo-1200x900.svg">-->
 <meta property="og:description"
        content="A simple and creative multiplayer online music game">
 
@@ -43,41 +43,43 @@
 <style>
 @font-face { font-family: 'Ubuntu'; font-weight: 400; font-style: normal;
   src: local('Ubuntu Regular'), local('Ubuntu-Regular')
-    , url(support/asset/font/ubuntu-regular.woff2) format('woff2');
+    , url(asset/font/ubuntu-regular.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
     , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 @font-face { font-family: 'Ubuntu'; font-weight: 400; font-style: italic;
   src: local('Ubuntu Italic'), local('Ubuntu-Italic')
-    , url(support/asset/font/ubuntu-italic.woff2) format('woff2');
+    , url(asset/font/ubuntu-italic.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
     , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 @font-face { font-family: 'Ubuntu'; font-weight: 700; font-style: normal;
   src: local('Ubuntu Bold'), local('Ubuntu-Bold')
-    , url(support/asset/font/ubuntu-bold.woff2) format('woff2');
+    , url(asset/font/ubuntu-bold.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
     , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 @font-face { font-family: 'Ubuntu'; font-weight: 700; font-style: italic;
   src: local('Ubuntu Bold Italic'), local('Ubuntu-BoldItalic')
-    , url(support/asset/font/ubuntu-bolditalic.woff2) format('woff2');
+    , url(asset/font/ubuntu-bolditalic.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
     , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 @font-face { font-family: 'Ubuntu Mono'; font-weight: 400; font-style: normal;
   src: local('Ubuntu Mono'), local('UbuntuMono-Regular')
-    , url(support/asset/font/ubuntumono-regular.woff2) format('woff2');
+    , url(asset/font/ubuntumono-regular.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
     , U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 </style>
 
 <!-- Load styles -->
-<link rel="stylesheet" href="support/asset/css/bootstrap.4.0.0.min.css">
-<link rel="stylesheet" href="support/asset/css/main.css">
-<link rel="stylesheet" href="support/asset/css/game-color.css">
-<link rel="stylesheet" href="support/asset/css/game-layout.css">
+<link rel="stylesheet" href="asset/css/bootstrap.4.0.0.min.css">
+<link rel="stylesheet" href="asset/css/main.css">
+<link rel="stylesheet" href="asset/css/game-color.css">
+<link rel="stylesheet" href="asset/css/game-landscape.css">
+<link rel="stylesheet" href="asset/css/game-layout.css">
+<link rel="stylesheet" href="asset/css/game-moossician.css">
 
 
 
@@ -114,7 +116,23 @@
 
     <!-- The big square where all the action happens -->
     <div class="game-table-cell game-square-wrap">
-      <div class="game-square"></div>
+      <div class="game-square">
+
+<div id="clearing"></div>
+
+<div id="me" class="moossician">
+  <div class="left leg"></div>
+  <div class="right leg"></div>
+  <div class="bod"></div>
+  <div class="hed">
+    <div class="antler"></div>
+    <div class="left eye"></div>
+    <div class="right eye"></div>
+    <div class="nose"></div>
+  </div>
+</div>
+
+      </div>
     </div>
 
     <!-- Right-hand buttons in landscape orientation -->
@@ -143,11 +161,10 @@
 
   </div><!--.game-table-row -->
 
+  <!-- Buttons in portrait orientation -->
   <div class="game-table-row game-buttons-gap">
     <div class="game-table-cell"></div>
   </div>
-
-  <!-- Buttons in portrait orientation -->
   <div class="bottom game-buttons game-table-row">
     <div class="game-table">
       <div class="game-table-row">
@@ -184,5 +201,12 @@
   </div>
 
 </div><!--.game-table -->
+
+<!-- Boot the App -->
+<script type="module">
+    import { boot } from './asset/js/boot.js'
+    boot()
+</script>
+
 </body>
 </html>

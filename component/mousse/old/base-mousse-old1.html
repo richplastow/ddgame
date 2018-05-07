@@ -1,0 +1,76 @@
+<!--
+1. Import ‘sweet-mousse.html’ and ‘savoury-mousse.html’
+2. Define the #base-mousse template (slotted structure and style)
+3. Load a JS module defining the <base-mousse> custom element
+-->
+
+
+<!-- 1. Import ‘sweet-mousse.html’ and ‘savoury-mousse.html’ -->
+<!-- <link rel="import" href="./sweet-mousse.html">
+<link rel="import" href="./savoury-mousse.html"> -->
+
+
+<!-- 2. Define the #base-component template (slotted structure and style) -->
+<template id="base-mousse">
+  <style>
+    .wrap {
+        width: 1000px; height: 1000px;
+        transform-origin:0 0;
+        transform: scale(0.3);
+        background: #ccc;
+    }
+    .main {
+        position: absolute;
+        width: 800px; height: 800px;
+        background: linear-gradient(#fae, #f6a);
+        box-shadow:
+            inset -30px -30px 20px 50px #fff
+          , inset -50px -50px 100px 100px #c6a
+          ,        20px  20px 50px  0px #fff
+        ;
+        border-radius: 450px 300px 1000px 300px;
+        transform-origin: 380px 550px;
+        transform: rotate(45deg);
+        animation: wobble 0.3s ease-in infinite alternate;
+    }
+    @keyframes wobble {
+        from { transform: rotate(45deg); border-radius: 500px 350px 1000px 350px; }
+        to   { transform: rotate(45deg); border-radius: 600px 300px 1000px 300px; }
+    }
+    .bowl {
+        position: absolute;
+        box-sizing: border-box;
+        width: 800px; height: 800px;
+        border-bottom: 30px solid #000;
+        border-right: 30px solid #000;
+        border-radius: 450px 300px 1000px 300px;
+        transform-origin: 300px 570px;
+        transform: rotate(45deg);
+    }
+    .foot {
+        position: absolute;
+        box-sizing: border-box;
+        width: 800px; height: 800px;
+        box-shadow:
+            inset -30px -30px 20px 50px #fff
+          , inset  30px   0px 10px 30px rgba(40,0,20,0.5)
+        ;
+        border: 30px solid #000;
+        border-radius: 400px;
+        transform: scaleY(0.4) translate(100px, 1000px);
+    }
+  </style>
+  <div class="wrap">
+    <div class="foot"></div>
+    <div class="bowl"></div>
+    <div class="main"></div>
+  </div>
+</template>
+
+
+<!-- 3. Load a JS module defining the <base-mousse> custom element -->
+<script type="module" src="./BaseMousse.js"></script>
+
+<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<script>document.head.appendChild(Object.assign(document.createElement('script')
+,{type:'module',src:'./BaseMousse.js'}))</script>

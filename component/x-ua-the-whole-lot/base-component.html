@@ -1,0 +1,38 @@
+<!--
+1. Import ‘sub-component.html’
+2. Define the #base-component template (slotted structure and style)
+3. Load a JS module defining the <base-component> custom element
+-->
+
+<!-- 1. Import ‘sub-component.html’ -->
+<link rel="import" href="./sub-component.html">
+
+
+<!-- 2. Define the #base-component template (slotted structure and style) -->
+<template id="base-component">
+  <style>
+    p { color: red }
+    h4 { color: blue }
+    slot { font-style: italic; }
+    .mousse {
+        width: 100px; height: 100px;
+        background: linear-gradient(#fae, #f6a);
+        border-bottom: 5px solid #ace;
+        border-right: 5px solid #ace;
+        box-shadow: inset -5px -5px 20px 5px #fff;
+        border-radius: 45px 30px 100px 30px;
+        transform: rotate(45deg) translate(20px,-20px);
+    }
+  </style>
+  <p>A red paragraph. <slot name="first-slot">BROKEN!</slot></p>
+  <h4>A blue H4. <slot name="second-slot">BROKEN!</slot></h4>
+  <div class="mousse"></div>
+</template>
+
+
+<!-- 3. Load a JS module defining the <base-component> custom element -->
+<script type="module" src="./BaseComponent.js"></script>
+
+<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<script>document.head.appendChild(Object.assign(document.createElement('script')
+,{type:'module',src:'./BaseComponent.js'}))</script>

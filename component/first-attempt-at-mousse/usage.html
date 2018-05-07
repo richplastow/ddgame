@@ -1,0 +1,27 @@
+<!DOCTYPE HTML><html lang="en-GB">
+<head><meta charset="utf-8"><title>Mousse Demo</title>
+
+<!-- Polyfill Web Components for legacy browsers -->
+<script src="../../asset/js/webcomponents-lite.js"></script>
+
+<!-- Define <base-mousse> and import its subcomponents -->
+<link rel="import" href="./base-mousse.html">
+
+</head><body>
+
+<h1>Mousse Demo</h1>
+
+<!-- Warn legacy UAs--><script>!function(d,p){if(!window.customElements)d.write(
+p+'Web Components</p>');if(!'import' in document.createElement('link'))d.write(p
++'HTML Imports</p>')}(document,'<p>Your browser does not support ')</script>
+
+
+<base-mousse flavour="mint">
+  <span slot="my-text">are working!</span>
+</base-mousse>
+
+<sweet-mousse flavour="mint">
+  <span slot="my-text">are working!</span>
+</sweet-mousse>
+
+</body></html>

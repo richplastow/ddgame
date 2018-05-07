@@ -1,0 +1,19 @@
+<!-- Import <base-mousse>’s subcomponents -->
+<link rel="import" href="./sweet-mousse.html">
+<link rel="import" href="./savoury-mousse.html">
+
+<div class="title">BaseMousse</div>
+
+<template>
+  <style>
+    h1 { font-style: italic; }
+    .outer { border: 2px solid red; }
+  </style>
+  <p>Base: HTML Imports Works!</p>
+  Base Template Slots <slot name="my-text">do not work</slot>
+</template>
+
+<!-- Load the component’s script -->
+<script type="module">
+    import './base-mousse.js'
+</script>

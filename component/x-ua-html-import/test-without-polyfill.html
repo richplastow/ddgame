@@ -1,0 +1,37 @@
+<!DOCTYPE HTML><html lang="en-GB">
+<head><meta charset="utf-8"><title>Cross-Browser HTML Import - WITHOUT polyfill</title>
+
+<!-- Import an HTML snippet which will import another HTML snippet -->
+<link rel="import" href="./base-snippet.html">
+
+</head><body>
+
+<h1>An Example of Cross-Browser HTML Import - WITHOUT polyfill</h1>
+
+<h4>Should say ‘Base Snippet ... Sub Snippet!’ in UAs which support HTML Import natively:</h4>
+<pre id="result"></pre>
+
+<!-- Warn legacy UAs--><script>!function(d,p){if(!window.customElements)d.write(
+p+'Web Components</p>');if(!'import' in document.createElement('link'))d.write(p
++'HTML Imports</p>')}(document,'<p>Your browser does not support ')</script>
+
+<script>!function () {
+const $result = document.querySelector('#result')
+
+const base = getContentFromLinkEl(document, 'base-snippet')
+$result.innerHTML += lastMatch(base, '.title').innerHTML // `lastMatch()` is for non-polyfilled UAs
+
+const sub = getContentFromLinkEl(base, 'sub-snippet')
+$result.innerHTML += lastMatch(sub, '.title').innerHTML
+
+function getContentFromLinkEl (top, name) {
+    return top.querySelector('link[rel="import"][href$="'+name+'.html"]').import
+}
+function lastMatch (top, selector) {
+    const $$matches =  top.querySelectorAll(selector)
+    return $$matches[$$matches.length-1]
+}
+
+}()</script>
+
+</body></html>

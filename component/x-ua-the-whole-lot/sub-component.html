@@ -1,0 +1,23 @@
+<!--
+1. Define the #sub-component template (slotted structure and style)
+3. Load a JS module defining the <sub-component> custom element
+-->
+
+<!-- 1. Define the #sub-component template (slotted structure and style) -->
+<template id="sub-component">
+  <style>
+    p { color: purple }
+    h4 { color: green }
+    slot { font-family: monospace; }
+  </style>
+  <p>A purple paragraph. <slot name="first-slot">BROKEN!</slot></p>
+  <h4>A green H4. <slot name="second-slot">BROKEN!</slot></h4>
+</template>
+
+
+<!-- 2. Load a JS module defining the <sub-component> custom element -->
+<script type="module" src="./SubComponent.js"></script>
+
+<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<script>document.head.appendChild(Object.assign(document.createElement('script')
+,{type:'module',src:'./SubComponent.js'}))</script>

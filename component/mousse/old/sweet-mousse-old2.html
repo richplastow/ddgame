@@ -1,0 +1,178 @@
+<!--
+1. Define the #sweet-mousse template (slotted structure and style)
+2. Load a JS module defining the <sweet-mousse> custom element
+-->
+
+<!-- 1. Define the #sweet-mousse template (slotted structure and style) -->
+<template id="sweet-mousse">
+  <style>
+    div {
+        position: absolute;
+    }
+    .game-sq {
+        position: fixed;
+        top: 0; left: 0; width: 100vmin; height: 100vmin;
+        perspective-origin: 50% -10%;
+        perspective: 80vmin;
+        background: #f009;
+    }
+    .clearing {
+        position: absolute;
+        width: 96vmin;
+        height: 96vmin;
+        background: linear-gradient(#acb 16%, #cfd 75%);
+        transform-origin: center;
+        transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
+    }
+    .thing {
+        width: 5vmin; height: 5vmin;
+        background: blue;
+        transform-origin: center bottom;
+        transform: translate3d(0,95vmin,-100vmin);
+    }
+    .wrap {
+        width: 1000px; height: 1000px;
+        transform-origin: center bottom;
+        transform: scale3d(0.2, 0.2, 0.2) translate3d(0,0,-1000vmin);
+    }
+    .wrap.white-chocolate {
+        /* animation: white-chocolate 10s ease-in infinite */
+    }
+    .wrap.berry {
+        /* animation: berry 10s ease-in infinite */
+    }
+    .bowl, .refraction-mask {
+        width: 800px; height: 450px; top: 450px; left: 100px;
+        border-radius: 20px 20px 350px 350px;
+    }
+    .bowl {
+        box-shadow:
+            inset #fffc  0  5px  5px  5px
+          , inset #000   0 -20px 30px 15px
+          /* , inset #f096 0  20px 50px 20px */
+        ;
+        background:
+            radial-gradient(circle at 550px 50px
+              , #fff9 0%, #fff0 40%, #fff0 50%
+              , #fff 70%, #fff 75%, #fff0 76%
+              , #fff0 100%
+            )
+          , radial-gradient(ellipse at 90px -10px, #fff 3%, #fff0 8%)
+        ;
+    }
+    .refraction-mask {
+        overflow: hidden;
+    }
+    .refraction {
+        width: 3000px; height: 100px; top: -20px; left: -1100px;
+        background: radial-gradient(ellipse at center 35px, #f09a 20%, #f090 40%);
+        /* animation: being-eaten-refraction 10s ease-in infinite */
+    }
+    .food-mask, .food-mask-hilite {
+        width: 700px; height: 400px; bottom: 150px; left: 150px;
+        border-radius: 350px 350px 0 0;
+        /* animation:
+            being-eaten 10s ease-in infinite
+          , wobble 2.5s ease-in infinite
+        ; */
+    }
+    .food-mask {
+        overflow: hidden;
+    }
+    .food-mask-hilite {
+        box-shadow: inset #fff 0 50px 50px -20px;
+    }
+    .food {
+        width: 700px; height: 800px; bottom: 0; left: 0;
+        border-radius: 0 0 300px 300px;
+        box-shadow: inset #0009 0 -50px 100px -20px;
+        background:
+            radial-gradient(ellipse at 70% 100%, #f060 15%, #c39 40%, #00f0 55%)
+          , radial-gradient(ellipse at 10%  50%, #f390  5%, #93f 45%, #f030 70%)
+          , linear-gradient(#f9f, #906)
+        ;
+    }
+    .shade {
+        width: 300px; height: 300px; bottom: -50px; left: 350px;
+        background: #000;
+        border-radius: 150px;
+        box-shadow:
+            #000 0 0 100px 50px
+          , #603 0 0 200px 100px
+        ;
+        transform: scaleY(0.1);
+    }
+    @keyframes wobble {
+          0% { border-radius: 300px 400px 0 0; }
+          5% { border-radius: 400px 300px 0 0; }
+         10% { border-radius: 300px 400px 0 0; }
+         15% { border-radius: 375px 325px 0 0; }
+         20% { border-radius: 340px 360px 0 0; }
+         25% { border-radius: 355px 345px 0 0; }
+         30% { border-radius: 350px 350px 0 0; }
+
+         95% { border-radius: 350px 350px 0 0; }
+        100% { border-radius: 250px 450px 0 0; }
+    }
+    @keyframes being-eaten {
+          0% { height: 800px; }
+         20% { height: 800px; }
+         25% { height: 650px; }
+         45% { height: 650px; }
+         50% { height: 450px; }
+         70% { height: 450px; }
+         75% { height: 200px; box-shadow: inset #fff 0 50px 50px -60px; }
+         95% { height: 200px; box-shadow: inset #fff 0 50px 50px -60px; }
+        100% { height: 800px; }
+    }
+    @keyframes being-eaten-refraction {
+          0% { width: 3000px; height: 100px; left: -1100px; }
+         20% { width: 3000px; height: 100px; left: -1100px; }
+         25% { width: 2500px; height:  88px; left:  -850px; }
+         45% { width: 2500px; height:  88px; left:  -850px; }
+         50% { width: 1500px; height:  75px; left:  -350px; }
+         70% { width: 1500px; height:  75px; left:  -350px; }
+         75% { width: 1000px; height:  50px; left:  -100px; }
+         95% { width: 1000px; height:  50px; left:  -100px; }
+        100% { width: 3000px; height: 100px; left: -1100px; }
+    }
+    @keyframes white-chocolate {
+          0%   { filter: hue-rotate(180deg) saturate(0.3); }
+        100%   { filter: hue-rotate(180deg) saturate(0.3); }
+    }
+    @keyframes berry {
+          0%   { filter: hue-rotate(0deg); }
+         12.5% { filter: hue-rotate(0deg) saturate(2); }
+         25%   { filter: hue-rotate(22deg) saturate(2); }
+         37.5% { filter: hue-rotate(22deg); }
+         50%   { filter: hue-rotate(-10deg); }
+         62.5% { filter: hue-rotate(-10deg) saturate(2); }
+         75%   { filter: hue-rotate(-45deg) saturate(2); }
+         87.5% { filter: hue-rotate(-45deg); }
+        100%   { filter: hue-rotate(0deg); }
+    }
+  </style>
+<div class="game-sq">
+  <div class="clearing"></div>
+  <div class="thing"></div>
+  <div class="wrap">
+    <div class="shade"></div>
+    <div class="food-mask">
+      <div class="food"></div>
+    </div>
+    <div class="food-mask-hilite"></div>
+    <div class="refraction-mask">
+      <div class="refraction"></div>
+    </div>
+    <div class="bowl"></div>
+  </div>
+</div>
+</template>
+
+
+<!-- 2. Load a JS module defining the <sweet-mousse> custom element -->
+<script type="module" src="./SweetMousse.js"></script>
+
+<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<script>document.head.appendChild(Object.assign(document.createElement('script')
+,{type:'module',src:'./SweetMousse.js'}))</script>
