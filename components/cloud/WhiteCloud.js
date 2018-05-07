@@ -1,6 +1,6 @@
 import { flavours } from './attributes.js'
 
-class SweetMousse extends HTMLElement {
+class WhiteCloud extends HTMLElement {
 
     constructor() {
         super()
@@ -8,17 +8,15 @@ class SweetMousse extends HTMLElement {
         //// Clone the template into a new Shadow DOM.
         const
             $baseLink = document.querySelector(
-                'link[rel="import"][href$="base-mousse.html"]')
+                'link[rel="import"][href$="base-cloud.html"]')
           , $subLink = $baseLink.import.querySelector(
-                'link[rel="import"][href$="sweet-mousse.html"]')
-          , $template = $subLink.import.querySelector('#sweet-mousse')
+                'link[rel="import"][href$="white-cloud.html"]')
+          , $template = $subLink.import.querySelector('#white-cloud')
           , $clonedTemplate = $template.content.cloneNode(true)
           , frag = this.attachShadow({mode:'open'}).appendChild($clonedTemplate)
 
         //// Handy refs to elements whose styles depend on attributes.
         this.$main = this.shadowRoot.querySelector('.main')
-        this.$shade = this.shadowRoot.querySelector('.shade')
-        this.$shadeWrap = this.shadowRoot.querySelector('.shade-wrap')
 
         //// Validate attributes, cast them to their proper type, and apply.
         this.attributeChangedCallback()
@@ -51,14 +49,10 @@ class SweetMousse extends HTMLElement {
         this.$main.classList.add(flavour)
         this.$main.style.transform =
             `translate3d(${x-5}vmin, ${y+63}vmin, ${-z}vmin)`
-        this.$shade.style.left = `${Math.max(0, 3.5+y)}vmin`
-        this.$shade.style.left = `${Math.max(0, 3.5+y)}vmin`
-        this.$shadeWrap.style.transform =
-            `translate3d(${x-5}vmin, 63vmin, ${-z}vmin)`
     }
 
 }
 
-customElements.define('sweet-mousse', SweetMousse)
+customElements.define('white-cloud', WhiteCloud)
 
-export { SweetMousse }
+export { WhiteCloud }

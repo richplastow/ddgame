@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en-GB">
 <head><meta charset="utf-8">
-<title>Mousse Demo</title>
+<title>Cloud Demo</title>
 
 <style>
     body {
@@ -32,12 +32,12 @@
 <script src="../../asset/js/webcomponents-lite.js"></script>
 
 <!--
-Import ‘base-mousse.html’ which will:
-1. Import ‘sweet-mousse.html’ and ‘savoury-mousse.html’
-2. Define the #base-mousse template (slotted structure and style)
-3. Load a JS module defining the <base-mousse> custom element
+Import ‘base-cloud.html’ which will:
+1. Import ‘white-cloud.html’ and ‘thunder-cloud.html’
+2. Define the #base-cloud template (slotted structure and style)
+3. Load a JS module defining the <base-cloud> custom element
 -->
-<link rel="import" href="./base-mousse.html">
+<link rel="import" href="./base-cloud.html">
 
 </head><body>
 
@@ -45,24 +45,22 @@ Import ‘base-mousse.html’ which will:
 <div class="game-square">
   <div id="clearing"></div>
 
-  <sweet-mousse flavour="berry" x="0" z="0"></sweet-mousse>
-  <sweet-mousse flavour="apple" x="96" z="0"></sweet-mousse>
-
-  <!-- 'xx' is invalid, so defaults to 'chocolate': -->
-  <sweet-mousse flavour="xx" x="48" y="-1" z="20"></sweet-mousse>
+  <white-cloud flavour="berry" x="0" z="0"></white-cloud>
+  <white-cloud flavour="apple" x="96" z="0"></white-cloud>
+  <white-cloud flavour="xx" x="48" y="-1" z="20"></white-cloud>
 
 </div>
 
 <!-- Use the components -->
 
-<!-- <base-mousse></base-mousse> -->
-<!-- <sweet-mousse></sweet-mousse> -->
-<!-- <sweet-mousse flavour="berry"></sweet-mousse> -->
-<!--<savoury-mousse flavour="beetroot"></savoury-mousse> -->
+<!-- <base-cloud></base-cloud> -->
+<!-- <white-cloud></white-cloud> -->
+<!-- <white-cloud flavour="berry"></white-cloud> -->
+<!--<thunder-cloud flavour="beetroot"></thunder-cloud> -->
 
 
 <h1 style="position:absolute; width:100%; text-align:center; z-index:99">
-  Mousse Demo
+  Cloud Demo
 </h1>
 
 </body></html>

@@ -1,7 +1,7 @@
 /* COLOR FOR game.html */
 
 html, body {
-    background: #000;
+    background: #49A0E7;
 }
 
 
@@ -32,5 +32,9 @@ html, body {
 /* SQUARE */
 
 .game-square {
-    background: #c0a;
+}
+
+#clearing {
+    background: #fff9;
+    box-shadow: #fff9 0 0 5vmin 5vmin;
 }

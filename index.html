@@ -15,7 +15,7 @@
             maximum-scale=1.0, user-scalable=no">
 
 <!-- Search engine meta -->
-<title>Moossical 0.0.3</title>
+<title>Play DD Game 0.0.2</title>
 <meta name="description"
    content="A simple and creative multiplayer online music game">
 <link rel="author" href="README.md">
@@ -26,11 +26,11 @@
 <meta name="twitter:creator" content="@richplastow">
 <meta property="og:type"     content="website">
 <meta property="og:locale"   content="en_GB">
-<meta property="og:title"    content="Moossical">
-<meta property="og:url"      content="http://moossical.loop.coop/">
+<meta property="og:title"    content="Play DD Game">
+<meta property="og:url"      content="http://richplastow.com/ddgame/index.html">
 <!-- @TODO
 <meta property="og:image"
-       content="http://moossical.loop.coop/asset/logo/logo-1200x900.svg">-->
+       content="http://richplastow.com/ddgame/asset/logo/logo-1200x900.svg">-->
 <meta property="og:description"
        content="A simple and creative multiplayer online music game">
 
@@ -76,30 +76,147 @@
 <!-- Load styles -->
 <link rel="stylesheet" href="asset/css/bootstrap.4.0.0.min.css">
 <link rel="stylesheet" href="asset/css/main.css">
+<link rel="stylesheet" href="asset/css/game-color.css">
+<link rel="stylesheet" href="asset/css/game-landscape.css">
+<link rel="stylesheet" href="asset/css/game-layout.css">
+<link rel="stylesheet" href="asset/css/game-balloon.css">
+
+
+<!-- Polyfill ‘HTML Imports’ for legacy browsers -->
+<script src="asset/js/webcomponents-lite.js"></script>
+
+<!--
+Import ‘base-cloud.html’ which will:
+1. Import ‘white-cloud.html’ and ‘thunder-cloud.html’
+2. Define the #base-cloud template (slotted structure and style)
+3. Load a JS module defining the <base-cloud> custom element
+-->
+<link rel="import" href="components/cloud/base-cloud.html">
 
 
 
 
 </head>
 <body>
-<div class="container">
+<div class="game-table">
 
-<div class="row">
-<div class="col-12">
-<h1>Moossical 0.0.3</h1>
+  <div class="game-table-row">
 
-<h4>A simple and creative multiplayer online music game</h4>
-<h4>The canonical example for
-  <a href="https://github.com/loopdotcoop/moosse">Moosse</a></h4>
+    <!-- Left-hand buttons in landscape orientation -->
+    <div class="left left-right game-buttons game-table-cell">
+      <div class="game-table">
+        <div class="game-table-row">
+          <div class="game-table-cell" title="Up">
+            <div class="game-button game-button-up">&#x25b2;</div>
+          </div>
+        </div>
+        <div class="game-table-row">
+          <div class="game-table-cell" title="Left">
+            <div class="game-button game-button-left">&#x25c0;</div>
+          </div>
+        </div>
+        <div class="game-table-row">
+          <div class="game-table-cell game-buttons-gap">&nbsp;</div>
+        </div>
+        <div class="game-table-row">
+          <div class="game-table-cell vab" title="Menu">
+            <div class="game-button game-button-menu">&hellip;</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<br>
+    <!-- The big square where all the action happens -->
+    <div class="game-table-cell game-square-wrap">
+      <div class="game-square">
 
-<a href="https://github.com/loopdotcoop/moossical">Repo</a> &nbsp;|&nbsp;
-<a href="game.html">Play Online</a>
+<div id="clearing"></div>
 
-</div><!--.col-12 -->
-</div><!--.row -->
+<div id="me" class="balloon">
+  <div class="top canopy"></div>
+  <div class="bottom canopy"></div>
+  <div class="basket"></div>
+</div>
 
-</div><!--.container -->
+<white-cloud flavour="berry" x="0" z="0"></white-cloud>
+<white-cloud flavour="apple" x="96" z="0"></white-cloud>
+<white-cloud flavour="xx" x="48" y="-1" z="20"></white-cloud>
+
+      </div>
+    </div>
+
+    <!-- Right-hand buttons in landscape orientation -->
+    <div class="right left-right game-buttons game-table-cell">
+      <div class="game-table">
+        <div class="game-table-row">
+          <div class="game-table-cell" title="Down">
+            <div class="game-button game-button-down top">&#x25bc;</div>
+          </div>
+        </div>
+        <div class="game-table-row">
+          <div class="game-table-cell" title="Right">
+            <div class="game-button game-button-right">&#x25b6;</div>
+          </div>
+        </div>
+        <div class="game-table-row">
+          <div class="game-table-cell game-buttons-gap">&nbsp;</div>
+        </div>
+        <div class="game-table-row">
+          <div class="game-table-cell vab" title="Choose">
+            <div class="game-button game-button-choose">&#x2713;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!--.game-table-row -->
+
+  <!-- Buttons in portrait orientation -->
+  <div class="game-table-row game-buttons-gap">
+    <div class="game-table-cell"></div>
+  </div>
+  <div class="bottom game-buttons game-table-row">
+    <div class="game-table">
+      <div class="game-table-row">
+        <div class="game-table-cell" title="Left">
+          <div class="game-button game-button-left">&#x25c0;</div>
+        </div>
+        <div class="game-table-cell" title="Up">
+          <div class="game-button game-button-up">&#x25b2;</div>
+        </div>
+        <div class="game-table-cell ipad-portrait" title="Menu">
+          <div class="game-button game-button-menu">&hellip;</div>
+        </div>
+        <div class="game-table-cell ipad-portrait" title="Choose">
+          <div class="game-button game-button-choose">&#x2713;</div>
+        </div>
+        <div class="game-table-cell" title="Down">
+          <div class="game-button game-button-down top">&#x25bc;</div>
+        </div>
+        <div class="game-table-cell" title="Right">
+          <div class="game-button game-button-right">&#x25b6;</div>
+        </div>
+      </div>
+    </div>
+    <div class="game-table not-ipad-portrait">
+      <div class="game-table-row">
+        <div class="game-table-cell" title="Menu">
+          <div class="game-button game-button-menu">&hellip;</div>
+        </div>
+        <div class="game-table-cell" title="Choose">
+          <div class="game-button game-button-choose">&#x2713;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!--.game-table -->
+
+<!-- Boot the App -->
+<script type="module">
+    import { boot } from './asset/js/boot.js'
+    boot()
+</script>
+
 </body>
 </html>

@@ -1,7 +1,7 @@
 /* LANDSCAPE FOR game.html */
 
 .game-square {
-    background: linear-gradient(#c9f, #ecf 15%, #acb 16%, #cfd 75%);
+    /* background: linear-gradient(#c9f, #ecf 15%, #acb 16%, #cfd 75%); */
     perspective-origin: 50% -10%;
     perspective: 80vmin;
 }
@@ -10,7 +10,6 @@
     position: absolute;
     width: 96vmin;
     height: 96vmin;
-    background: #f0c;
     transform-origin: center;
     transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
 }

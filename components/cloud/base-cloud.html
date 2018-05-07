@@ -1,17 +1,17 @@
 <!--
-1. Import ‘sweet-mousse.html’ and ‘savoury-mousse.html’
-2. Define the #base-mousse template (slotted structure and style)
-3. Load a JS module defining the <base-mousse> custom element
+1. Import ‘white-cloud.html’ and ‘thunder-cloud.html’
+2. Define the #base-cloud template (slotted structure and style)
+3. Load a JS module defining the <base-cloud> custom element
 -->
 
 
-<!-- 1. Import ‘sweet-mousse.html’ and ‘savoury-mousse.html’ -->
-<link rel="import" href="./sweet-mousse.html">
-<!-- <link rel="import" href="./savoury-mousse.html"> -->
+<!-- 1. Import ‘white-cloud.html’ and ‘thunder-cloud.html’ -->
+<link rel="import" href="./white-cloud.html">
+<!-- <link rel="import" href="./thunder-cloud.html"> -->
 
 
 <!-- 2. Define the #base-component template (slotted structure and style) -->
-<template id="base-mousse">
+<template id="base-cloud">
   <style>
     .wrap {
         width: 1000px; height: 1000px;
@@ -113,9 +113,9 @@
 </template>
 
 
-<!-- 3. Load a JS module defining the <base-mousse> custom element -->
-<script type="module" src="./BaseMousse.js"></script>
+<!-- 3. Load a JS module defining the <base-cloud> custom element -->
+<script type="module" src="./BaseCloud.js"></script>
 
 <!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
 <script>document.head.appendChild(Object.assign(document.createElement('script')
-,{type:'module',src:'./BaseMousse.js'}))</script>
+,{type:'module',src:'./components/cloud/BaseCloud.js'}))</script>

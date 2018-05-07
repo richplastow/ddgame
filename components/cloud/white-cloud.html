@@ -1,0 +1,76 @@
+<!--
+1. Define the #white-cloud template (slotted structure and style)
+2. Load a JS module defining the <white-cloud> custom element
+-->
+
+<!-- 1. Define the #white-cloud template (slotted structure and style) -->
+<template id="white-cloud">
+  <style>
+    div {
+        position: absolute;
+    }
+
+    /* MAIN */
+    .main {
+        width: 10vmin; height: 10vmin;
+        cursor: pointer;
+        transition: transform 0.5s;
+    }
+    .blob {
+        width: 8vmin; height: 8vmin; top: 0; left: 0;
+        background: #fff;
+        border-radius: 4vmin;
+    }
+    .left.blob {
+        width: 5vmin; height: 5vmin; top: 2.5vmin; left: -2vmin;
+    }
+    .right.blob {
+        width: 6.5vmin; height: 6.5vmin; top: 0.5vmin; left: 4vmin;
+    }
+  </style>
+  <div class="main">
+    <div class="left blob"></div>
+    <div class="mid blob"></div>
+    <div class="right blob"></div>
+  </div>
+
+</template>
+
+
+<!-- 2. Load a JS module defining the <white-cloud> custom element -->
+<script type="module" src="./WhiteCloud.js"></script>
+
+<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<script>document.head.appendChild(Object.assign(document.createElement('script')
+,{type:'module',src:'./components/cloud/WhiteCloud.js'}))</script>
+
+
+
+<!--
+    .back-left {
+        width: 2vmin; height: 2vmin;
+        background: blue;
+        transform: translate3d(0vmin,72vmin,-96vmin);
+    }
+    .back-right {
+        width: 2vmin; height: 2vmin;
+        background: red;
+        transform: translate3d(96vmin,72vmin,-96vmin);
+    }
+    .front-left {
+        width: 2vmin; height: 2vmin;
+        background: green;
+        transform: translate3d(0vmin,72vmin,0vmin);
+    }
+    .front-right {
+        width: 2vmin; height: 2vmin;
+        background: yellow;
+        transform: translate3d(96vmin,72vmin,0vmin);
+    }
+...
+  <div class="back-left"></div>
+  <div class="back-right"></div>
+  <div class="front-left"></div>
+  <div class="front-right"></div>
+
+-->
