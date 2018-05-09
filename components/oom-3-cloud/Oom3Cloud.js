@@ -1,6 +1,24 @@
-import { flavours } from './attributes.js'
+import { apiOom3Cloud } from './apiOom3Cloud.js'
+import { Oom3 } from '../oom-3/Oom3.js'
 
-class WhiteCloud extends HTMLElement {
+class Oom3Cloud extends Oom3 {
+
+    constructor () {
+        super(apiOom3Cloud)
+    }
+
+    //// Observe the attributes, to make attributeChangedCallback() work.
+    static get observedAttributes() { return Object.keys(apiOom3Cloud.attributes) }
+}
+
+customElements.define('oom-3-cloud', Oom3Cloud)
+
+export { Oom3Cloud }
+
+/*
+import { api } from './api.js'
+
+class Oom3Cloud extends HTMLElement {
 
     constructor() {
         super()
@@ -8,7 +26,7 @@ class WhiteCloud extends HTMLElement {
         //// Clone the template into a new Shadow DOM.
         const
             $baseLink = document.querySelector(
-                'link[rel="import"][href$="base-cloud.html"]')
+                'link[rel="import"][href$="components/all.html"]')
           , $subLink = $baseLink.import.querySelector(
                 'link[rel="import"][href$="white-cloud.html"]')
           , $template = $subLink.import.querySelector('#white-cloud')
@@ -53,6 +71,7 @@ class WhiteCloud extends HTMLElement {
 
 }
 
-customElements.define('white-cloud', WhiteCloud)
+customElements.define('white-cloud', Oom3Cloud)
 
-export { WhiteCloud }
+export { Oom3Cloud }
+*/

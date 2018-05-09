@@ -1,10 +1,14 @@
 <!--
-1. Define the #white-cloud template (slotted structure and style)
-2. Load a JS module defining the <white-cloud> custom element
+A fluffy cloud, to hide your balloon behind.
+1. Define the #oom-3-cloud template
+2. Load a JS module defining:
+  - The Oom3Cloud class
+  - The <oom-3-cloud> custom element
 -->
 
-<!-- 1. Define the #white-cloud template (slotted structure and style) -->
-<template id="white-cloud">
+
+<!-- 1. Define the #oom-3-cloud template -->
+<template id="oom-3-cloud">
   <style>
     div {
         position: absolute;
@@ -28,6 +32,7 @@
         width: 6.5vmin; height: 6.5vmin; top: 0.5vmin; left: 4vmin;
     }
   </style>
+
   <div class="main">
     <div class="left blob"></div>
     <div class="mid blob"></div>
@@ -37,12 +42,12 @@
 </template>
 
 
-<!-- 2. Load a JS module defining the <white-cloud> custom element -->
-<script type="module" src="./WhiteCloud.js"></script>
+<!-- 2. Load a JS module defining the class and custom element -->
+<script type="module" src="./Oom3Cloud.js"></script>
 
 <!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
 <script>document.head.appendChild(Object.assign(document.createElement('script')
-,{type:'module',src:'./components/cloud/WhiteCloud.js'}))</script>
+,{type:'module',src:'./components/oom-3-cloud/Oom3Cloud.js'}))</script>
 
 
 
