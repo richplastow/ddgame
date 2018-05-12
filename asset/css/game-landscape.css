@@ -2,6 +2,9 @@
 
 .game-square {
     /* background: linear-gradient(#c9f, #ecf 15%, #acb 16%, #cfd 75%); */
+    position: absolute;
+    top: 50%; left: 50%; width: 96vmin; height: 96vmin;
+    margin: -48vmin 0 0 -48vmin;
     perspective-origin: 50% -10%;
     perspective: 80vmin;
 }

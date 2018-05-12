@@ -1,0 +1,62 @@
+<!DOCTYPE HTML><html lang="en-GB">
+<head><meta charset="utf-8">
+<title>Oom3 Demo</title>
+
+<style>
+    body {
+        margin: 0;
+        font: 18px Arial;
+        color: #906;
+    }
+    .game-square {
+        position: absolute;
+        top: 50%; left: 50%; width: 96vmin; height: 96vmin;
+        margin: -48vmin 0 0 -48vmin;
+        background: linear-gradient(#f9a, #dcf 15%, #93a 16%, #c6a 75%);
+        border-radius: 2vmin;
+        perspective-origin: 50% -10%;
+        perspective: 80vmin;
+    }
+    #clearing {
+        position: absolute;
+        width: 96vmin;
+        height: 96vmin;
+        background: #fff3;
+        box-shadow: #fff3 0 0 5vmin 5vmin;
+        transform-origin: center;
+        transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
+    }
+</style>
+
+<!-- Polyfill ‘HTML Imports’ for legacy browsers -->
+<script src="../../asset/js/webcomponents-lite.js"></script>
+
+<!--
+Import ‘oom.html’ which will:
+1. Define the #oom-3 template
+2. Load a JS module defining:
+  - The Oom3 class
+  - The <oom-3> custom element
+-->
+<link rel="import" href="../oom.html">
+
+</head><body>
+
+
+<div class="game-square">
+  <div id="clearing"></div>
+
+  <!-- Use the component -->
+  <oom-3 x="1"  y="0" z="96" title="Back Left"></oom-3>
+  <oom-3 x="95" y="0" z="96" title="Back Right"></oom-3>
+  <oom-3 x="0"  y="0" z="0" title="Front Left"></oom-3>
+  <oom-3 x="96" y="0" z="0" title="Front Right"></oom-3>
+
+</div>
+
+
+<h1 style="position:absolute; width:100%; text-align:center; z-index:99">
+  Oom3 Demo
+</h1>
+
+</body></html>

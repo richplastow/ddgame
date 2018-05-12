@@ -16,16 +16,17 @@ A generic 3D container, which all visible 3D objects should extend.
         position: absolute;
     }
     .main {
-        width: 10vmin; height: 10vmin;
+        width: 0; height: 0; margin: -2vmin 0 0 -1vmin;
         cursor: pointer;
         transition: transform 0.5s;
-        background: #f009;
+        border-width: 0;
+        border-top: 2vmin solid red;
+        border-left: 1vmin solid transparent;
+        border-right: 1vmin solid transparent;
     }
   </style>
 
-  <div class="wrap">
-    <div class="main"></div>
-  </div>
+  <div class="main"></div>
 
 </template>
 
@@ -34,5 +35,6 @@ A generic 3D container, which all visible 3D objects should extend.
 <script type="module" src="./Oom3.js"></script>
 
 <!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
-<script>document.head.appendChild(Object.assign(document.createElement('script')
-,{type:'module',src:'./components/oom-3/Oom3.js'}))</script>
+<script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
+:'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
+,'oom-3/Oom3.js')})))(document,'oom.html')</script>

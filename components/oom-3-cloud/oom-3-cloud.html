@@ -46,8 +46,9 @@ A fluffy cloud, to hide your balloon behind.
 <script type="module" src="./Oom3Cloud.js"></script>
 
 <!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
-<script>document.head.appendChild(Object.assign(document.createElement('script')
-,{type:'module',src:'./components/oom-3-cloud/Oom3Cloud.js'}))</script>
+<script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
+:'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
+,'oom-3-cloud/Oom3Cloud.js')})))(document,'oom.html')</script>
 
 
 

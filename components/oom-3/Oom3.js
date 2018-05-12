@@ -15,7 +15,7 @@ class Oom3 extends HTMLElement {
         //// Clone the template into a new Shadow DOM.
         const
             $baseLink = document.querySelector(
-                'link[rel="import"][href$="components/oom.html"]')
+                'link[rel="import"][href$="oom.html"]')
           , $subLink = $baseLink.import.querySelector(
                 `link[rel="import"][href$="${this.oom.api.name}.html"]`)
           , $template = $subLink.import.querySelector('#'+this.oom.api.name) // eg '#oom-3-foo'
@@ -26,7 +26,7 @@ class Oom3 extends HTMLElement {
         this.oom.api.elements.forEach( selector => {
             this.oom.$el[selector] = this.shadowRoot.querySelector(selector)
         })
-
+console.log(this.oom.$el);
         //// Validate attributes, cast to proper types, and store in `instance`.
         for (let name in this.oom.api.attributes) this.parseAttribute(name)
 
@@ -36,9 +36,8 @@ class Oom3 extends HTMLElement {
         this.addEventListener('oom-z-change', onXYZChange)
         function onXYZChange (evt) {
             const { x, y, z } = this.oom.instance
-            console.log(x,y,z, `translate3d(${x-5}vmin, ${y+63}vmin, ${-z}vmin)`);
             this.oom.$el['.main'].style.transform =
-                `translate3d(${x-5}vmin, ${y+63}vmin, ${-z}vmin)`
+                `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin)`
         }
 
         //// Deal with mouse events.
