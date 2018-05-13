@@ -1,102 +1,122 @@
 import { apiOom3 } from './apiOom3.js'
 
-class Oom3 extends HTMLElement {
 
-    constructor(api) {
+//// Define the oom3 class.
+class Oom3 extends HTMLElement {
+    static get api () { return apiOom3 }
+    static get parent () { return HTMLElement } //@TODO is there a JS built-in ref?
+
+    constructor() {
+
+        //// Call HTMLElement’s constructor(). Then we can reference `this`.
         super()
+        const api = this.constructor.api
+
+        //// Clone the <template> into a new Shadow DOM.
+        this.attachShadow({mode:'open'}).appendChild(
+            this.constructor.$template.content.cloneNode(true)
+        )
 
         //// All Oom custom elements have an `oom` property.
         this.oom = {
-            instance: {}
-          , $:{}
-          , api: api || apiOom3 // sub-classes should call `super(apiOom3Foo)`
-        } //@TODO static
+            instance: {} // mostly attributes, parsed and cast
+          , $: {} // handy references to sub-elements
+        }
 
-        //// Clone the template into a new Shadow DOM.
-        this.attachShadow({mode:'open'}).appendChild(
-            this.constructor.oom.$.template.content.cloneNode(true)
-        )
+        //// Store handy references to various sub-elements.
+        for (const name in api.elements)
+            this.oom.$[name] = this.shadowRoot.querySelector(api.elements[name])
 
-        //// Store handy refs to various elements.
-        this.oom.api.elements.forEach( selector => {
-            this.oom.$[selector] = this.shadowRoot.querySelector(selector)
-        })
+        //// Listen for attribute changes.
+        for (const name in api.attributes)
+            for (const listener of api.attributes[name].onChange)
+                this.addEventListener(`oom-${name}-change`, listener)
 
         //// Validate attributes, cast to proper types, and store in `instance`.
-        for (let name in this.oom.api.attributes) this.parseAttribute(name)
-
-        //// Initialise event listeners.
-        this.addEventListener('oom-x-change', onXYZChange)
-        this.addEventListener('oom-y-change', onXYZChange)
-        this.addEventListener('oom-z-change', onXYZChange)
-        function onXYZChange (evt) {
-            const { x, y, z } = this.oom.instance
-            this.oom.$['.main'].style.transform =
-                `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin)`
-        }
-        this.addEventListener('oom-z-change', onZChange)
-        function onZChange (evt) {
-            const { z } = this.oom.instance
-            this.oom.$['.main'].style.zIndex = 97 - ~~z
-        }
-
-        this.addEventListener('oom-marker-change', onMarkerChange)
-        function onMarkerChange (evt) {
-            const { marker } = this.oom.instance
-            this.oom.$['.main'].classList.remove(
-                'marker-none','marker-red','marker-green','marker-blue')
-            this.oom.$['.main'].classList.add('marker-'+marker)
-        }
+        for (const name in api.attributes)
+            this.attributeChangedCallback(name)
 
         //// Deal with mouse events.
         this.addEventListener( 'click', e => this.setAttribute('y', -2) )
 
     }
 
-    //// Validates an attribute, casts it to the proper type, and stores it as
-    //// a property of `this.oom.instance`
+    //// Validates an attribute and casts it to the proper type.
     //// Used by `constructor()` and `attributeChangedCallback()`.
     parseAttribute (name) {
-        const parser = this.oom.api.attributes[name].parser // eg `v => +v || 0`
-        this.oom.instance[name] = parser(this.getAttribute(name)) // "1e2" > 100
+        const api = this.constructor.api
+        const parser = api.attributes[name].parser // eg `v => +v || 0`
+        return parser( this.getAttribute(name) ) // eg "1e2" becomes 100
     }
 
-    //// Observe the attributes, to make attributeChangedCallback() work.
-    static get observedAttributes() { return Object.keys(apiOom3.attributes) }
-
-    //// Deal with an attribute being added, removed or changed.
+    //// Deals with an attribute being added, removed or changed.
     attributeChangedCallback(name, oldValue, newValue) {
-        // console.log(name, oldValue, newValue); @TODO just operate on `name`
+        // console.log(name, oldValue, newValue); //@TODO just operate on `name`
 
-        //// Validate the attribute, cast it to its proper type.
-        this.parseAttribute(name)
+        //// Validate the attribute (cast to its proper type), and store it as a
+        //// property of `this.oom.instance`.
+        this.oom.instance[name] = this.parseAttribute(name)
 
         //// Trigger event listeners for this change.
         this.dispatchEvent( new Event(`oom-${name}-change`) )
     }
 
-}
-
-
-////
-const
-    $baseLink = document.querySelector(
-        'link[rel="import"][href$="oom.html"]')
-  , $subLink = $baseLink.import.querySelector(
-        `link[rel="import"][href$="${apiOom3.name}.html"]`)
-  , $template = $subLink.import.querySelector('#'+apiOom3.name) // eg '#oom-3-foo'
-  , $style = $template.content.querySelector('style')
-
-Oom3.oom = {
-    $: {
-        baseLink: $baseLink
-      , subLink: $subLink
-      , template: $template
-      , style: $style
+    //// Observe the attributes, to make attributeChangedCallback() work.
+    static get observedAttributes () {
+        return Object.keys(this.api.attributes)
     }
+
+    //// The current class’s <template>. Will be cloned into a new Shadow DOM
+    //// by the constructor().
+    static get $template () {
+        const
+            api = this.api
+          , namelc = this.api.name // eg '#oom-3-foo'
+          , $baseLink = document.querySelector(
+                'link[rel="import"][href$="oom.html"]')
+          , $subLink = $baseLink.import.querySelector(
+                `link[rel="import"][href$="${namelc}.html"]`)
+        return $subLink.import.querySelector('#'+namelc)
+    }
+
+    //// The <style> element of the current class’s <template>.
+    static get $style () {
+        return this.$template.content.querySelector('style')
+    }
+
+    //// Implement class-inheritance of CSS.
+    static get fullyInheritedStyle () {
+        let out = '', suffix = `.style-scope.${this.api.name}`
+        if ('function' === typeof this.parent.maybeScopedStyle) out += `
+/* Begin styles inherited from ${this.parent.api.name} */
+${this.parent.maybeScopedStyle(suffix)}
+/* End styles inherited from ${this.parent.api.name} */
+`
+        out += this.maybeScopedStyle(suffix) // `suffix` is only used if needed
+        return out
+    }
+
+    //// In legacy browsers, suffix <style> element’s selectors to limit scope.
+    static maybeScopedStyle (suffix) {
+        // if ( // github.com/webcomponents/webcomponentsjs/issues/26#issuecomment-159806570
+        //     'registerElement' in document
+        //  && 'import' in document.createElement('link')
+        //  && 'content' in document.createElement('template')
+        // ) return this.$style.innerHTML // Web Components supported natively
+
+        if (-1 === window.navigator.userAgent.indexOf('Firefox') )//@TODO change this after testing in more browsers
+            return this.$style.innerHTML // CSS scoped without help
+
+        return this.$style.innerHTML.replace( // needs suffixes to scope CSS
+            /([^]*?)\s*({[^]*?}|,)/g // stackoverflow.com/a/33236071
+          , `$1${suffix} $2`
+        )
+    }
+
 }
 
-
+//// Define the <oom-3> element.
 customElements.define('oom-3', Oom3)
 
 export { Oom3 }
+window.Oom3 = Oom3

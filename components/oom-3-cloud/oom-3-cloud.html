@@ -31,15 +31,26 @@ A fluffy cloud, to hide your balloon behind.
     .main.weather-storm .blob { background: #999; }
     .main.weather-lightning .blob { background: #333; }
 
+    /* SHADOW */
+    .shadow.weather-fair {
+        box-shadow: #0005 0 0 4vmin 4vmin, inset #0005 0 0 4vmin 4vmin;
+    }
+    .shadow.weather-storm {
+        box-shadow: #0009 0 0 4vmin 4vmin, inset #0009 0 0 4vmin 4vmin;
+    }
+    .shadow.weather-lightning {
+        box-shadow: #000c 0 0 4vmin 4vmin, inset #000c 0 0 4vmin 4vmin;
+    }
 
   </style>
 
-  <div class="main marker-none weather-fair">
+  <div class="main">
     <div class="left blob"></div>
     <div class="mid blob"></div>
     <div class="right blob"></div>
   </div>
-
+  <div class="shadow"></div>
+<!-- <h1>C</h1> -->
 </template>
 
 

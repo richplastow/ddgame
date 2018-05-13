@@ -12,9 +12,9 @@ A generic 3D container, which all visible 3D objects should extend.
 
   <!-- Styles will be inherited by components which extend this one -->
   <style>
-    div {
-        position: absolute;
-    }
+
+    div { position: absolute; }
+
     .main {
         width: 0; height: 0; margin: -2vmin 0 0 -1vmin;
         cursor: pointer;
@@ -26,9 +26,17 @@ A generic 3D container, which all visible 3D objects should extend.
     .main.marker-red   { border-top-color: #f00; }
     .main.marker-green { border-top-color: #0f0; }
     .main.marker-blue  { border-top-color: #00f; }
+
+    .shadow {
+        width: 1vmin; height: 1vmin; margin: -0.5vmin 0 0 -0.5vmin;
+        border-radius: 10vmin;
+        box-shadow: #0006 0 0 3vmin 2vmin, inset #0006 0 0 3vmin 2vmin;
+    }
+h1 { text-decoration: underline; }
   </style>
 
   <div class="main marker-none"></div>
+  <div class="shadow"></div>
 
 </template>
 

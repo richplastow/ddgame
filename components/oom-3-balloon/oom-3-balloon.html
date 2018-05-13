@@ -10,6 +10,11 @@ A hot air balloon, to play hide and seek with.
 <!-- 1. Define the #oom-3-balloon template -->
 <template id="oom-3-balloon">
   <style>
+    h1 {
+        font-style: italic;
+        font-weight: normal;
+        color: blue;
+    }
     .upper.canopy {
         width: 10vmin;
         height: 5vmin;
@@ -43,6 +48,11 @@ A hot air balloon, to play hide and seek with.
         background: radial-gradient(ellipse at 50% 30%, #0f3 25%, #060 80%); }
     .main.upper-black .upper.canopy, .main.lower-black .lower.canopy {
         background: radial-gradient(ellipse at 50% 30%, #333 25%, #000 80%); }
+
+    .shadow {
+        box-shadow: #0006 0 0 3vmin 3vmin, inset #0006 0 0 3vmin 3vmin;
+    }
+
   </style>
 
   <div class="main marker-none upper-yellow lower-yellow">
@@ -50,7 +60,9 @@ A hot air balloon, to play hide and seek with.
     <div class="lower canopy"></div>
     <div class="basket"></div>
   </div>
+  <div class="shadow"></div>
 
+<!-- <h1>B</h1> -->
 </template>
 
 
