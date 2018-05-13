@@ -1,0 +1,63 @@
+<!--
+A hot air balloon, to play hide and seek with.
+1. Define the #oom-3-balloon template
+2. Load a JS module defining:
+  - The Oom3Balloon class
+  - The <oom-3-balloon> custom element
+-->
+
+
+<!-- 1. Define the #oom-3-balloon template -->
+<template id="oom-3-balloon">
+  <style>
+    .upper.canopy {
+        width: 10vmin;
+        height: 5vmin;
+        margin: -16vmin 0 0 -5vmin;
+        border-radius: 4.5vmin 4.5vmin 0.5vmin 0.5vmin;
+    }
+    .lower.canopy {
+        width: 10vmin;
+        height: 5vmin;
+        margin: -11vmin 0 0 -5vmin;
+        border-radius: 0.5vmin 0.5vmin 4.5vmin 4.5vmin;
+    }
+    .basket {
+        width:  5vmin;
+        height: 3vmin;
+        margin: -5vmin 0 0 -2.5vmin;
+        background: linear-gradient(#ca9 25%, #963 80%);
+        border-radius: 0.5vmin;
+    }
+    .main.upper-or .upper.canopy, .main.lower-or .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #fc6 25%, #f90 80%); }
+    .main.upper-argent .upper.canopy, .main.lower-argent .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #eef 25%, #ccd 80%); }
+    .main.upper-azure .upper.canopy, .main.lower-azure .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #09f 25%, #03c 80%); }
+    .main.upper-gules .upper.canopy, .main.lower-gules .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #f30 25%, #600 80%); }
+    .main.upper-purpure .upper.canopy, .main.lower-purpure .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #90c 25%, #309 80%); }
+    .main.upper-vert .upper.canopy, .main.lower-vert .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #0f3 25%, #060 80%); }
+    .main.upper-sable .upper.canopy, .main.lower-sable .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #333 25%, #000 80%); }
+  </style>
+
+  <div class="main marker-none upper-or lower-or">
+    <div class="upper canopy"></div>
+    <div class="lower canopy"></div>
+    <div class="basket"></div>
+  </div>
+
+</template>
+
+
+<!-- 2. Load a JS module defining the class and custom element -->
+<script type="module" src="./Oom3Balloon.js"></script>
+
+<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
+:'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
+,'oom-3-balloon/Oom3Balloon.js')})))(document,'oom.html')</script>
