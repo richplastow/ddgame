@@ -4,7 +4,6 @@ class Oom3 extends HTMLElement {
 
     constructor(api) {
         super()
-const Class = this.constructor
 
         //// All Oom custom elements have an `oom` property.
         this.oom = {
@@ -15,7 +14,7 @@ const Class = this.constructor
 
         //// Clone the template into a new Shadow DOM.
         this.attachShadow({mode:'open'}).appendChild(
-            Class.oom.$.template.content.cloneNode(true)
+            this.constructor.oom.$.template.content.cloneNode(true)
         )
 
         //// Store handy refs to various elements.
@@ -35,6 +34,12 @@ const Class = this.constructor
             this.oom.$['.main'].style.transform =
                 `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin)`
         }
+        this.addEventListener('oom-z-change', onZChange)
+        function onZChange (evt) {
+            const { z } = this.oom.instance
+            this.oom.$['.main'].style.zIndex = 97 - ~~z
+        }
+
         this.addEventListener('oom-marker-change', onMarkerChange)
         function onMarkerChange (evt) {
             const { marker } = this.oom.instance

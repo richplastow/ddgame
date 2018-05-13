@@ -45,9 +45,13 @@ new Promise( (resolve, reject) => {
         then = now
         me.x = Math.min( 96, me.x + ('e' === me.going ? diff/10 : 0) )
         me.x = Math.max(  0, me.x - ('w' === me.going ? diff/10 : 0) )
-        me.z = Math.min(  0, me.z + ('s' === me.going ? diff/10 : 0) )
-        me.z = Math.max(-96, me.z - ('n' === me.going ? diff/10 : 0) )
-        me.$main.style.transform = `translate3d(${me.x}vmin,72vmin,${me.z}vmin)`
+        me.z = Math.min( 96, me.z + ('n' === me.going ? diff/10 : 0) )
+        me.z = Math.max(  0, me.z - ('s' === me.going ? diff/10 : 0) )
+        if ( me.x != me.$el.getAttribute('x') )
+            me.$el.setAttribute('x', me.x)
+        if ( me.z != me.$el.getAttribute('z') )
+            me.$el.setAttribute('z', me.z)
+        // me.$main.style.transform = `translate3d(${me.x}vmin,72vmin,${me.z}vmin)`
     }
     animate()
 })

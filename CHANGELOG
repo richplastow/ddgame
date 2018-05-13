@@ -4,3 +4,4 @@
 0.0.4 Basic components/oom-3/demo.html
 0.0.5 'marker' and 'weather' attributes
 0.0.6 Basic components/oom-3-balloon/
+0.0.7 Uses z-index for occlusion
