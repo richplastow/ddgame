@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en-GB">
 <head><meta charset="utf-8">
-<title>Cloud Demo</title>
+<title>Oom3Cloud Demo</title>
 
 <style>
     body {
@@ -12,7 +12,7 @@
         position: absolute;
         top: 50%; left: 50%; width: 96vmin; height: 96vmin;
         margin: -48vmin 0 0 -48vmin;
-        background: linear-gradient(#f9a, #dcf 15%, #93a 16%, #c6a 75%);
+        background: linear-gradient(#fa9, #dfc 15%, #9a3 16%, #ca6 75%);
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
         perspective: 80vmin;
@@ -32,12 +32,13 @@
 <script src="../../asset/js/webcomponents-lite.js"></script>
 
 <!--
-Import ‘base-cloud.html’ which will:
-1. Import ‘white-cloud.html’ and ‘thunder-cloud.html’
-2. Define the #base-cloud template
-3. Load a JS module defining the <base-cloud> custom element
+Import ‘oom.html’ which will:
+1. Define the #oom-3 template
+2. Load a JS module defining:
+  - The Oom3 class
+  - The <oom-3> custom element
 -->
-<link rel="import" href="./base-cloud.html">
+<link rel="import" href="../oom.html">
 
 </head><body>
 
@@ -45,22 +46,18 @@ Import ‘base-cloud.html’ which will:
 <div class="game-square">
   <div id="clearing"></div>
 
-  <white-cloud flavour="berry" x="0" z="0"></white-cloud>
-  <white-cloud flavour="apple" x="96" z="0"></white-cloud>
-  <white-cloud flavour="xx" x="48" y="-1" z="20"></white-cloud>
+  <!-- Use the component -->
+  <oom-3-cloud x="0"  y="0" z="96" title="Back Left" marker="red" weather="fair"></oom-3-cloud>
+  <oom-3-cloud x="96" y="0" z="96" title="Back Right" marker="green" weather="storm"></oom-3-cloud>
+  <oom-3-cloud x="0"  y="0" z="0" title="Front Left" marker="blue" weather="lightning"></oom-3-cloud>
+  <oom-3-cloud x="96" y="0" z="0" title="Front Right" marker="red"></oom-3-cloud>
+
+  <oom-3-cloud x="20"  y="0" z="46" title="With no marker"></oom-3-cloud>
 
 </div>
 
-<!-- Use the components -->
-
-<!-- <base-cloud></base-cloud> -->
-<!-- <white-cloud></white-cloud> -->
-<!-- <white-cloud flavour="berry"></white-cloud> -->
-<!--<thunder-cloud flavour="beetroot"></thunder-cloud> -->
-
-
 <h1 style="position:absolute; width:100%; text-align:center; z-index:99">
-  Cloud Demo
+  Oom3Cloud Demo
 </h1>
 
 </body></html>

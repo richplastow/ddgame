@@ -47,10 +47,14 @@ Import ‘oom.html’ which will:
   <div id="clearing"></div>
 
   <!-- Use the component -->
-  <oom-3 x="1"  y="0" z="96" title="Back Left"></oom-3>
-  <oom-3 x="95" y="0" z="96" title="Back Right"></oom-3>
-  <oom-3 x="0"  y="0" z="0" title="Front Left"></oom-3>
-  <oom-3 x="96" y="0" z="0" title="Front Right"></oom-3>
+  <oom-3 x="0"  y="0" z="96" title="Back Left" marker="red"></oom-3>
+  <oom-3 x="96" y="0" z="96" title="Back Right" marker="green"></oom-3>
+  <oom-3 x="0"  y="0" z="0" title="Front Left" marker="blue"></oom-3>
+  <oom-3 x="96" y="0" z="0" title="Front Right" marker="red"></oom-3>
+
+  <oom-3 x="90" y="0" z="0" title="Invalid marker attribute" marker="invalid"></oom-3>
+  <oom-3 x="92" y="0" z="0" title="marker is 'none'" marker="none"></oom-3>
+  <oom-3 x="94" y="0" z="0" title="No marker attribute"></oom-3>
 
 </div>
 

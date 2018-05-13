@@ -14,26 +14,27 @@ A fluffy cloud, to hide your balloon behind.
         position: absolute;
     }
 
-    /* MAIN */
     .main {
-        width: 10vmin; height: 10vmin;
-        cursor: pointer;
-        transition: transform 0.5s;
+        /* border-top-color: transparent; */
     }
     .blob {
-        width: 8vmin; height: 8vmin; top: 0; left: 0;
-        background: #fff;
+        width: 8vmin; height: 8vmin; top: -10vmin; left: -4vmin;
         border-radius: 4vmin;
     }
     .left.blob {
-        width: 5vmin; height: 5vmin; top: 2.5vmin; left: -2vmin;
+        width: 5vmin; height: 5vmin; top: -7.5vmin; left: -6vmin;
     }
     .right.blob {
-        width: 6.5vmin; height: 6.5vmin; top: 0.5vmin; left: 4vmin;
+        width: 6.5vmin; height: 6.5vmin; top: -9.5vmin; left: 0vmin;
     }
+    .main.weather-fair .blob { background: #fff; }
+    .main.weather-storm .blob { background: #999; }
+    .main.weather-lightning .blob { background: #333; }
+
+
   </style>
 
-  <div class="main">
+  <div class="main marker-none weather-fair">
     <div class="left blob"></div>
     <div class="mid blob"></div>
     <div class="right blob"></div>

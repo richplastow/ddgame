@@ -20,13 +20,16 @@ A generic 3D container, which all visible 3D objects should extend.
         cursor: pointer;
         transition: transform 0.5s;
         border-width: 0;
-        border-top: 2vmin solid red;
+        border-top: 2vmin solid transparent;
         border-left: 1vmin solid transparent;
         border-right: 1vmin solid transparent;
     }
+    .main.marker-red   { border-top-color: #f00; }
+    .main.marker-green { border-top-color: #0f0; }
+    .main.marker-blue  { border-top-color: #00f; }
   </style>
 
-  <div class="main"></div>
+  <div class="main marker-none"></div>
 
 </template>
 

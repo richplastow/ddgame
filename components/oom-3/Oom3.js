@@ -4,29 +4,25 @@ class Oom3 extends HTMLElement {
 
     constructor(api) {
         super()
+const Class = this.constructor
 
         //// All Oom custom elements have an `oom` property.
         this.oom = {
             instance: {}
-          , $el:{}
+          , $:{}
           , api: api || apiOom3 // sub-classes should call `super(apiOom3Foo)`
         } //@TODO static
 
         //// Clone the template into a new Shadow DOM.
-        const
-            $baseLink = document.querySelector(
-                'link[rel="import"][href$="oom.html"]')
-          , $subLink = $baseLink.import.querySelector(
-                `link[rel="import"][href$="${this.oom.api.name}.html"]`)
-          , $template = $subLink.import.querySelector('#'+this.oom.api.name) // eg '#oom-3-foo'
-          , $clonedTemplate = $template.content.cloneNode(true)
-          , frag = this.attachShadow({mode:'open'}).appendChild($clonedTemplate)
+        this.attachShadow({mode:'open'}).appendChild(
+            Class.oom.$.template.content.cloneNode(true)
+        )
 
         //// Store handy refs to various elements.
         this.oom.api.elements.forEach( selector => {
-            this.oom.$el[selector] = this.shadowRoot.querySelector(selector)
+            this.oom.$[selector] = this.shadowRoot.querySelector(selector)
         })
-console.log(this.oom.$el);
+
         //// Validate attributes, cast to proper types, and store in `instance`.
         for (let name in this.oom.api.attributes) this.parseAttribute(name)
 
@@ -36,8 +32,15 @@ console.log(this.oom.$el);
         this.addEventListener('oom-z-change', onXYZChange)
         function onXYZChange (evt) {
             const { x, y, z } = this.oom.instance
-            this.oom.$el['.main'].style.transform =
+            this.oom.$['.main'].style.transform =
                 `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin)`
+        }
+        this.addEventListener('oom-marker-change', onMarkerChange)
+        function onMarkerChange (evt) {
+            const { marker } = this.oom.instance
+            this.oom.$['.main'].classList.remove(
+                'marker-none','marker-red','marker-green','marker-blue')
+            this.oom.$['.main'].classList.add('marker-'+marker)
         }
 
         //// Deal with mouse events.
@@ -68,6 +71,26 @@ console.log(this.oom.$el);
     }
 
 }
+
+
+////
+const
+    $baseLink = document.querySelector(
+        'link[rel="import"][href$="oom.html"]')
+  , $subLink = $baseLink.import.querySelector(
+        `link[rel="import"][href$="${apiOom3.name}.html"]`)
+  , $template = $subLink.import.querySelector('#'+apiOom3.name) // eg '#oom-3-foo'
+  , $style = $template.content.querySelector('style')
+
+Oom3.oom = {
+    $: {
+        baseLink: $baseLink
+      , subLink: $subLink
+      , template: $template
+      , style: $style
+    }
+}
+
 
 customElements.define('oom-3', Oom3)
 
