@@ -1,12 +1,16 @@
+import { parse, on } from '../oom-kit.js'
+
 const apiOom3 = {
     name: 'oom-3'
   , attributes: {
-        x: { parser:parseNumber, onChange:[onXYZChange] }
-      , y: { parser:parseNumber, onChange:[onXYZChange] }
-      , z: { parser:parseNumber, onChange:[onXYZChange,onZChange] }
+        x: { parser:parse.number, onChange:[onXYZChange] }
+      , y: { parser:parse.number, onChange:[onXYZChange] }
+      , z: { parser:parse.number, onChange:[onXYZChange,onZChange] }
       , marker: {
-            parser:parseMarker, onChange:[onMarkerChange]
+            parser: parse.enum
+          , onChange: [on.change]
           , valid:['none','red','green','blue']
+          , linkedElements: ['main']
         }
     }
   , elements: {
@@ -20,19 +24,7 @@ export { apiOom3 }
 
 
 
-//// PARSERS
-
-function parseNumber (value) { return +value || 0 }
-
-function parseMarker (value) {
-    const valid = apiOom3.attributes.marker.valid
-    return 0 > valid.indexOf(value) ? valid[0] : value
-}
-
-
-
-
-//// ON ATTRIBUTE CHANGE
+//// EVENT HANDLERS
 
 function onXYZChange (evt) {
     const { x, y, z } = this.oom.instance
@@ -45,11 +37,4 @@ function onXYZChange (evt) {
 function onZChange (evt) {
     const { z } = this.oom.instance
     this.oom.$.main.style.zIndex = 97 - ~~z
-}
-
-function onMarkerChange (evt) {
-    const { marker } = this.oom.instance
-    this.oom.$.main.classList.remove(
-        'marker-none','marker-red','marker-green','marker-blue')
-    this.oom.$.main.classList.add('marker-'+marker)
 }

@@ -21,6 +21,8 @@ class Oom3 extends HTMLElement {
         this.oom = {
             instance: {} // mostly attributes, parsed and cast
           , $: {} // handy references to sub-elements
+          , Class: this.constructor
+          , api
         }
 
         //// Store handy references to various sub-elements.
@@ -43,13 +45,15 @@ class Oom3 extends HTMLElement {
 
     //// Validates an attribute and casts it to the proper type.
     //// Used by `constructor()` and `attributeChangedCallback()`.
-    parseAttribute (name) {
-        const api = this.constructor.api
-        const parser = api.attributes[name].parser // eg `v => +v || 0`
-        return parser( this.getAttribute(name) ) // eg "1e2" becomes 100
+    parseAttribute (attrName) {
+        const
+            api = this.constructor.api
+          , parser = api.attributes[attrName].parser.bind(this) // eg `v=>+v||0`
+        return parser(this.getAttribute(attrName), attrName) // eg "1e2" to 100
     }
 
     //// Deals with an attribute being added, removed or changed.
+		////@TODO poll in Firefox dev-mode, in case attributes are changed via inspector
     attributeChangedCallback(name, oldValue, newValue) {
         // console.log(name, oldValue, newValue); //@TODO just operate on `name`
 
@@ -98,12 +102,6 @@ ${this.parent.maybeScopedStyle(suffix)}
 
     //// In legacy browsers, suffix <style> element’s selectors to limit scope.
     static maybeScopedStyle (suffix) {
-        // if ( // github.com/webcomponents/webcomponentsjs/issues/26#issuecomment-159806570
-        //     'registerElement' in document
-        //  && 'import' in document.createElement('link')
-        //  && 'content' in document.createElement('template')
-        // ) return this.$style.innerHTML // Web Components supported natively
-
         if (-1 === window.navigator.userAgent.indexOf('Firefox') )//@TODO change this after testing in more browsers
             return this.$style.innerHTML // CSS scoped without help
 
