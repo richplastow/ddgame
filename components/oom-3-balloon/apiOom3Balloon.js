@@ -6,7 +6,7 @@ const apiOom3Balloon = { name:'oom-3-balloon' }
 const upperLowerConfig = {
     parser: parse.enum
   , onChange: [on.change]
-  , linkedElements: ['main']
+  , linkedElements: ['wrap']
   , valid: [
         'yellow' // or (gold), relates to topaz and the Sun
       , 'white' // argent (silver), relates to pearl and the Moon

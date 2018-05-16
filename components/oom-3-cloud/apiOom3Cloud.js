@@ -9,7 +9,7 @@ apiOom3Cloud.attributes = Object.assign({}, apiOom3.attributes, {
         parser: parse.enum
       , onChange: [on.change]
       , valid: ['fair','storm','lightning']
-      , linkedElements: ['main','shadow']
+      , linkedElements: ['wrap','shadow']
     }
 })
 

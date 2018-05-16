@@ -7,17 +7,10 @@ class Oom3Balloon extends Oom3 {
 }
 
 
-//// Inherit styles from super-class.
+//// Inherit styles from parent-class.
 Oom3Balloon.$style.innerHTML = Oom3Balloon.fullyInheritedStyle
-// Oom3Balloon.$style.innerHTML = `
-// /* Begin styles inherited from components/oom-3/oom-3.html */
-// ${Oom3.$style.innerHTML}
-// /* End styles inherited from components/oom-3/oom-3.html */
-//
-// ${Oom3Balloon.$style.innerHTML}
-// `
 
-
+//// Define the <oom-3-balloon> custom element.
 customElements.define('oom-3-balloon', Oom3Balloon)
 
 export { Oom3Balloon }

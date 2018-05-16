@@ -1,7 +1,11 @@
 /* COLOR FOR game.html */
 
+:root {
+    --fog-color: #49A0E7;
+}
+
 html, body {
-    background: #49A0E7;
+    background: var(--fog-color);
 }
 
 

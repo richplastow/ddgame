@@ -3,6 +3,10 @@
 <title>Oom3 Demo</title>
 
 <style>
+    :root {
+        --fog-color: #93a;
+        --hover-surround-color: #dcf;
+    }
     body {
         margin: 0;
         font: 18px Arial;
@@ -12,7 +16,10 @@
         position: absolute;
         top: 50%; left: 50%; width: 96vmin; height: 96vmin;
         margin: -48vmin 0 0 -48vmin;
-        background: linear-gradient(#f9a, #dcf 15%, #93a 16%, #c6a 75%);
+        background: linear-gradient(
+            #f9a, var(--hover-surround-color) 15%,
+            var(--fog-color) 16%, #c6a 75%
+        );
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
         perspective: 80vmin;
@@ -22,7 +29,7 @@
         width: 96vmin;
         height: 96vmin;
         background: #fff3;
-        box-shadow: #fff3 0 0 5vmin 5vmin;
+        /* box-shadow: #fff3 0 0 5vmin 5vmin; */
         transform-origin: center;
         transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
     }
@@ -40,14 +47,16 @@ Import ‘oom.html’ which will:
 -->
 <link rel="import" href="../oom.html">
 
-</head><body>
+</head><body class="oom-dev">
 
 
 <div class="game-square">
   <div id="clearing"></div>
 
   <!-- Use the component -->
-  <oom-3 x="0"  y="0" z="96" title="Back Left" marker="red"></oom-3>
+  <oom-3 x="44" y="0" z="10" title="Front and center" marker="blue"></oom-3>
+
+  <oom-3 x="0"  y="0" z="96" title="Back Left" marker="green"></oom-3>
   <oom-3 x="96" y="0" z="96" title="Back Right" marker="green"></oom-3>
   <oom-3 x="0"  y="0" z="0" title="Front Left" marker="blue"></oom-3>
   <oom-3 x="96" y="0" z="0" title="Front Right" marker="red"></oom-3>

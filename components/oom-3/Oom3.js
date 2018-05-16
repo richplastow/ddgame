@@ -19,7 +19,7 @@ class Oom3 extends HTMLElement {
 
         //// All Oom custom elements have an `oom` property.
         this.oom = {
-            instance: {} // mostly attributes, parsed and cast
+            instance: {} // mostly parsed and cast from attributes
           , $: {} // handy references to sub-elements
           , Class: this.constructor
           , api
@@ -27,7 +27,8 @@ class Oom3 extends HTMLElement {
 
         //// Store handy references to various sub-elements.
         for (const name in api.elements)
-            this.oom.$[name] = this.shadowRoot.querySelector(api.elements[name])
+            this.oom.$[name] =
+                this.shadowRoot.querySelector(api.elements[name].selector)
 
         //// Listen for attribute changes.
         for (const name in api.attributes)
@@ -38,7 +39,7 @@ class Oom3 extends HTMLElement {
         for (const name in api.attributes)
             this.attributeChangedCallback(name)
 
-        //// Deal with mouse events.
+        //// Listen for user events (typically mouse clicks, etc).
         this.addEventListener( 'click', e => this.setAttribute('y', -2) )
 
     }
@@ -53,7 +54,7 @@ class Oom3 extends HTMLElement {
     }
 
     //// Deals with an attribute being added, removed or changed.
-		////@TODO poll in Firefox dev-mode, in case attributes are changed via inspector
+    ////@TODO poll in Firefox dev-mode, in case attributes are changed via inspector
     attributeChangedCallback(name, oldValue, newValue) {
         // console.log(name, oldValue, newValue); //@TODO just operate on `name`
 
@@ -75,12 +76,12 @@ class Oom3 extends HTMLElement {
     static get $template () {
         const
             api = this.api
-          , namelc = this.api.name // eg '#oom-3-foo'
+          , name = this.api.name // eg 'oom-3-foo'
           , $baseLink = document.querySelector(
                 'link[rel="import"][href$="oom.html"]')
           , $subLink = $baseLink.import.querySelector(
-                `link[rel="import"][href$="${namelc}.html"]`)
-        return $subLink.import.querySelector('#'+namelc)
+                `link[rel="import"][href$="${name}.html"]`)
+        return $subLink.import.querySelector('#'+name)
     }
 
     //// The <style> element of the current class’s <template>.
@@ -92,10 +93,9 @@ class Oom3 extends HTMLElement {
     static get fullyInheritedStyle () {
         let out = '', suffix = `.style-scope.${this.api.name}`
         if ('function' === typeof this.parent.maybeScopedStyle) out += `
-/* Begin styles inherited from ${this.parent.api.name} */
-${this.parent.maybeScopedStyle(suffix)}
-/* End styles inherited from ${this.parent.api.name} */
-`
+            /* Begin styles inherited from ${this.parent.api.name} */
+            ${this.parent.maybeScopedStyle(suffix)}
+            /* End styles inherited from ${this.parent.api.name} */\n`
         out += this.maybeScopedStyle(suffix) // `suffix` is only used if needed
         return out
     }
@@ -113,8 +113,7 @@ ${this.parent.maybeScopedStyle(suffix)}
 
 }
 
-//// Define the <oom-3> element.
+//// Define the <oom-3> custom element.
 customElements.define('oom-3', Oom3)
 
 export { Oom3 }
-window.Oom3 = Oom3

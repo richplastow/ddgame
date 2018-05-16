@@ -13,30 +13,95 @@ A generic 3D container, which all visible 3D objects should extend.
   <!-- Styles will be inherited by components which extend this one -->
   <style>
 
-    div { position: absolute; }
+    /* GENERAL */
+    div {
+        position: absolute;
+        width: 0; height: 0;
+        overflow: visible!important;
+        box-sizing: content-box; /* Bootstrap sets `* { box-sizing: border-box }` */
+    }
 
-    .main {
-        width: 0; height: 0; margin: -2vmin 0 0 -1vmin;
+    /* WRAP */
+    .wrap {
+        width: 0; height: 0; top: 0; left: 0;
+        outline: none!important; /* on focus */
         cursor: pointer;
+    }
+
+    /* HITZONE */
+    .hitzone {
+        cursor: pointer;
+        z-index: 99;
+    }
+    .hitzone >* {
+        margin: -2vmin 0 0 -2vmin;
+        border: 2vmin solid transparent;
+    }
+
+    /* MAIN */
+    .main {
+    }
+
+    /* SILHOUETTE */
+    .silhouette {
+        opacity: 0; /* stronger towards the back, for a ‘fog’ effect */
+    }
+    .silhouette >* {
+        background: var(--fog-color, #808080);
+    }
+
+    /* SURROUND */
+    .surround {
+        z-index: -1;
+    }
+    .surround >* {
+        transition: box-shadow 0.3s;
+    }
+    .wrap:hover .surround >*,
+    .wrap:focus .surround >* {
+        box-shadow: var(--hover-surround-color, #09f) 0 0 0.5vmin 0.8vmin;
+    }
+
+    /* GROUND */
+    .ground {
+    }
+
+    /* MARKER */
+    .marker {
+        width: 0; height: 0; top: -2vmin; left: -1vmin;
         border-width: 0;
         border-top: 2vmin solid transparent;
         border-left: 1vmin solid transparent;
         border-right: 1vmin solid transparent;
     }
-    .main.marker-red   { border-top-color: #f00; }
-    .main.marker-green { border-top-color: #0f0; }
-    .main.marker-blue  { border-top-color: #00f; }
+    :host-context(body.oom-dev) .marker.marker-red   { border-top-color: #f00; }
+    :host-context(body.oom-dev) .marker.marker-green { border-top-color: #0f0; }
+    :host-context(body.oom-dev) .marker.marker-blue  { border-top-color: #00f; }
+    /* Firefox */ body.oom-dev  .marker.marker-red   { border-top-color: #f00; }
+                  body.oom-dev  .marker.marker-green { border-top-color: #0f0; }
+                  body.oom-dev  .marker.marker-blue  { border-top-color: #00f; }
+    /* As of 20180516 Safari does not support :host-context */
 
+    /* SHADOW */
     .shadow {
-        width: 1vmin; height: 1vmin; margin: -0.5vmin 0 0 -0.5vmin;
+        width: 0.4vmin; height: 0.4vmin; top: -0.2vmin; left: -0.2vmin;
         border-radius: 10vmin;
-        box-shadow: #0006 0 0 3vmin 2vmin, inset #0006 0 0 3vmin 2vmin;
+        background: #0006;
+        box-shadow: #0006 0 0 3vmin 2vmin;
+        transform: rotateX(80deg);
     }
-h1 { text-decoration: underline; }
   </style>
 
-  <div class="main marker-none"></div>
-  <div class="shadow"></div>
+  <div class="wrap"><!-- contains the hitzone and main visuals -->
+    <div class="hitzone"></div><!-- invisible, receives clicks etc -->
+    <div class="main"></div><!-- the main visual element -->
+    <div class="silhouette"></div><!-- same as .main but a solid color -->
+    <div class="surround"></div><!-- an outline, to show hover and focus -->
+  </div>
+  <div class="ground"><!-- outside of hitzone, remains at ground-level -->
+    <div class="shadow"></div>
+    <div class="marker"></div><!-- only visible during development -->
+  </div>
 
 </template>
 

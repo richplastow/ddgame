@@ -10,13 +10,13 @@ A fluffy cloud, to hide your balloon behind.
 <!-- 1. Define the #oom-3-cloud template -->
 <template id="oom-3-cloud">
   <style>
-    div {
-        position: absolute;
-    }
 
+    /* GENERAL */
     .blob {
+        border-radius: 10vmin;
+    }
+    .mid.blob {
         width: 8vmin; height: 8vmin; top: -10vmin; left: -4vmin;
-        border-radius: 4vmin;
     }
     .left.blob {
         width: 5vmin; height: 5vmin; top: -7.5vmin; left: -6vmin;
@@ -24,30 +24,55 @@ A fluffy cloud, to hide your balloon behind.
     .right.blob {
         width: 6.5vmin; height: 6.5vmin; top: -9.5vmin; left: 0vmin;
     }
-    .main.weather-fair .blob { background: #fff; }
-    .main.weather-storm .blob { background: #000; }
-    .main.weather-lightning .blob { background: #333; }
+
+    /* MAIN */
+    .wrap.weather-fair .main .blob { background: #fff; }
+    .wrap.weather-storm .main .blob { background: #999; }
+    .wrap.weather-lightning .main .blob { background: #333; }
 
     /* SHADOW */
     .shadow.weather-fair {
-        box-shadow: #0005 0 0 4vmin 4vmin, inset #0005 0 0 4vmin 4vmin;
+        background: #0004;
+        box-shadow: #0004 0 0 4vmin 4vmin;
     }
     .shadow.weather-storm {
-        box-shadow: #0009 0 0 4vmin 4vmin, inset #0009 0 0 4vmin 4vmin;
+        background: #0009;
+        box-shadow: #0009 0 0 4vmin 4vmin;
     }
     .shadow.weather-lightning {
-        box-shadow: #000c 0 0 4vmin 4vmin, inset #000c 0 0 4vmin 4vmin;
+        background: #000;
+        box-shadow: #000 0 0 4vmin 4vmin;
     }
 
   </style>
 
-  <div class="main">
-    <div class="left blob"></div>
-    <div class="mid blob"></div>
-    <div class="right blob"></div>
+  <div class="wrap" tabindex="1">
+    <div class="hitzone">
+      <div class="left blob"></div>
+      <div class="mid blob"></div>
+      <div class="right blob"></div>
+    </div>
+    <div class="main">
+      <div class="left blob"></div>
+      <div class="mid blob"></div>
+      <div class="right blob"></div>
+    </div>
+    <div class="silhouette">
+      <div class="left blob"></div>
+      <div class="mid blob"></div>
+      <div class="right blob"></div>
+    </div>
+    <div class="surround">
+      <div class="left blob"></div>
+      <div class="mid blob"></div>
+      <div class="right blob"></div>
+    </div>
   </div>
-  <div class="shadow"></div>
-<!-- <h1>C</h1> -->
+  <div class="ground">
+    <div class="shadow"></div>
+    <div class="marker"></div>
+  </div>
+
 </template>
 
 
@@ -58,34 +83,3 @@ A fluffy cloud, to hide your balloon behind.
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
 ,'oom-3-cloud/Oom3Cloud.js')})))(document,'oom.html')</script>
-
-
-
-<!--
-    .back-left {
-        width: 2vmin; height: 2vmin;
-        background: blue;
-        transform: translate3d(0vmin,72vmin,-96vmin);
-    }
-    .back-right {
-        width: 2vmin; height: 2vmin;
-        background: red;
-        transform: translate3d(96vmin,72vmin,-96vmin);
-    }
-    .front-left {
-        width: 2vmin; height: 2vmin;
-        background: green;
-        transform: translate3d(0vmin,72vmin,0vmin);
-    }
-    .front-right {
-        width: 2vmin; height: 2vmin;
-        background: yellow;
-        transform: translate3d(96vmin,72vmin,0vmin);
-    }
-...
-  <div class="back-left"></div>
-  <div class="back-right"></div>
-  <div class="front-left"></div>
-  <div class="front-right"></div>
-
--->

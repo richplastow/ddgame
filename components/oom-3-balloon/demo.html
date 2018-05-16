@@ -3,6 +3,10 @@
 <title>Oom3Balloon Demo</title>
 
 <style>
+    :root {
+        --fog-color: #39a;
+        --hover-surround-color: #cdf;
+    }
     body {
         margin: 0;
         font: 18px Arial;
@@ -12,7 +16,10 @@
         position: absolute;
         top: 50%; left: 50%; width: 96vmin; height: 96vmin;
         margin: -48vmin 0 0 -48vmin;
-        background: linear-gradient(#9fa, #cdf 15%, #39a 16%, #6ca 75%);
+        background: linear-gradient(
+            #9fa, var(--hover-surround-color) 15%,
+            var(--fog-color) 16%, #6ca 75%
+        );
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
         perspective: 80vmin;

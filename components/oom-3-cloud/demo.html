@@ -3,6 +3,10 @@
 <title>Oom3Cloud Demo</title>
 
 <style>
+    :root {
+        --fog-color: #9a3;
+        --hover-surround-color: #dfc;
+    }
     body {
         margin: 0;
         font: 18px Arial;
@@ -12,7 +16,10 @@
         position: absolute;
         top: 50%; left: 50%; width: 96vmin; height: 96vmin;
         margin: -48vmin 0 0 -48vmin;
-        background: linear-gradient(#fa9, #dfc 15%, #9a3 16%, #ca6 75%);
+        background: linear-gradient(
+            #fa9, var(--hover-surround-color) 15%,
+            var(--fog-color) 16%, #ca6 75%
+        );
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
         perspective: 80vmin;
@@ -40,19 +47,20 @@ Import ‘oom.html’ which will:
 -->
 <link rel="import" href="../oom.html">
 
-</head><body>
+</head><body class="oom-dev">
 
 
 <div class="game-square">
   <div id="clearing"></div>
+  <oom-3 x="10" y="0" z="0" title="Front Left" marker="green"></oom-3>
 
   <!-- Use the component -->
   <oom-3-cloud x="0"  y="0" z="96" title="Back Left" marker="red" weather="fair"></oom-3-cloud>
   <oom-3-cloud x="96" y="0" z="96" title="Back Right" marker="green" weather="storm"></oom-3-cloud>
-  <oom-3-cloud x="0"  y="0" z="0" title="Front Left" marker="blue" weather="lightning"></oom-3-cloud>
+  <oom-3-cloud x="0"  y="0" z="0" title="Front Left" marker="none" weather="lightning"></oom-3-cloud>
   <oom-3-cloud x="96" y="0" z="0" title="Front Right" marker="red"></oom-3-cloud>
 
-  <oom-3-cloud x="20"  y="0" z="46" title="With no marker"></oom-3-cloud>
+  <oom-3-cloud x="5"  y="0" z="5" title="With no marker" weather="storm"></oom-3-cloud>
 
 </div>
 

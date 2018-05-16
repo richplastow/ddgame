@@ -10,57 +10,87 @@ A hot air balloon, to play hide and seek with.
 <!-- 1. Define the #oom-3-balloon template -->
 <template id="oom-3-balloon">
   <style>
-    h1 {
-        font-style: italic;
-        font-weight: normal;
-        color: blue;
+
+    /* GENERAL */
+    .canopy {
+        width: 10vmin; height: 5vmin;
     }
     .upper.canopy {
-        width: 10vmin;
-        height: 5vmin;
-        margin: -16vmin 0 0 -5vmin;
+        top: -16vmin; left: -5vmin;
         border-radius: 4.5vmin 4.5vmin 0.5vmin 0.5vmin;
     }
     .lower.canopy {
-        width: 10vmin;
-        height: 5vmin;
-        margin: -11vmin 0 0 -5vmin;
+        top: -11vmin; left: -5vmin;
         border-radius: 0.5vmin 0.5vmin 4.5vmin 4.5vmin;
     }
     .basket {
-        width:  5vmin;
-        height: 3vmin;
-        margin: -5vmin 0 0 -2.5vmin;
-        background: linear-gradient(#ca9 25%, #963 80%);
+        width: 5vmin; height: 3vmin; top: -5vmin; left: -2.5vmin;
         border-radius: 0.5vmin;
     }
-    .main.upper-yellow .upper.canopy, .main.lower-yellow .lower.canopy {
-        background: radial-gradient(ellipse at 50% 30%, #fc6 25%, #f90 80%); }
-    .main.upper-white .upper.canopy, .main.lower-white .lower.canopy {
-        background: radial-gradient(ellipse at 50% 30%, #eef 25%, #ccd 80%); }
-    .main.upper-blue .upper.canopy, .main.lower-blue .lower.canopy {
-        background: radial-gradient(ellipse at 50% 30%, #09f 25%, #03c 80%); }
-    .main.upper-red .upper.canopy, .main.lower-red .lower.canopy {
-        background: radial-gradient(ellipse at 50% 30%, #f30 25%, #600 80%); }
-    .main.upper-purple .upper.canopy, .main.lower-purple .lower.canopy {
-        background: radial-gradient(ellipse at 50% 30%, #90c 25%, #309 80%); }
-    .main.upper-green .upper.canopy, .main.lower-green .lower.canopy {
-        background: radial-gradient(ellipse at 50% 30%, #0f3 25%, #060 80%); }
-    .main.upper-black .upper.canopy, .main.lower-black .lower.canopy {
-        background: radial-gradient(ellipse at 50% 30%, #333 25%, #000 80%); }
 
+    /* HITZONE */
+    .hitzone .upper.canopy {
+        border-radius: 6.5vmin 6.5vmin 0 0;
+    }
+    .hitzone .lower.canopy {
+        border-radius: 0 0 6.5vmin 6.5vmin;
+    }
+    .hitzone .basket {
+        border-radius: 0;
+    }
+
+    /* MAIN */
+    .wrap.upper-yellow .main .upper.canopy, .wrap.lower-yellow .main .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #fc6 25%, #f90 80%); }
+    .wrap.upper-white .main .upper.canopy, .wrap.lower-white .main .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #eef 25%, #ccd 80%); }
+    .wrap.upper-blue .main .upper.canopy, .wrap.lower-blue .main .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #09f 25%, #03c 80%); }
+    .wrap.upper-red .main .upper.canopy, .wrap.lower-red .main .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #f30 25%, #600 80%); }
+    .wrap.upper-purple .main .upper.canopy, .wrap.lower-purple .main .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #90c 25%, #309 80%); }
+    .wrap.upper-green .main .upper.canopy, .wrap.lower-green .main .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #0f3 25%, #060 80%); }
+    .wrap.upper-black .main .upper.canopy, .wrap.lower-black .main .lower.canopy {
+        background: radial-gradient(ellipse at 50% 30%, #333 25%, #000 80%); }
+    .main .basket {
+        background: linear-gradient(#ca9 25%, #963 80%);
+    }
+
+    /* SHADOW */
     .shadow {
-        box-shadow: #0006 0 0 3vmin 3vmin, inset #0006 0 0 3vmin 3vmin;
+        box-shadow: #0006 0 0 3vmin 3vmin;
     }
 
   </style>
 
-  <div class="main marker-none upper-yellow lower-yellow">
-    <div class="upper canopy"></div>
-    <div class="lower canopy"></div>
-    <div class="basket"></div>
+  <div class="wrap" tabindex="1">
+    <div class="hitzone">
+      <div class="upper canopy"></div>
+      <div class="lower canopy"></div>
+      <div class="basket"></div>
+    </div>
+    <div class="main">
+      <div class="upper canopy"></div>
+      <div class="lower canopy"></div>
+      <div class="basket"></div>
+    </div>
+    <div class="silhouette">
+      <div class="upper canopy"></div>
+      <div class="lower canopy"></div>
+      <div class="basket"></div>
+    </div>
+    <div class="surround">
+      <div class="upper canopy"></div>
+      <div class="lower canopy"></div>
+      <div class="basket"></div>
+    </div>
   </div>
-  <div class="shadow"></div>
+  <div class="ground">
+    <div class="shadow"></div>
+    <div class="marker"></div>
+  </div>
 
 <!-- <h1>B</h1> -->
 </template>

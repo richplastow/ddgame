@@ -6,18 +6,10 @@ class Oom3Cloud extends Oom3 {
     static get parent () { return Oom3 } //@TODO is there a JS built-in ref?
 }
 
-
-//// Inherit styles from super-class.
+//// Inherit styles from parent-class.
 Oom3Cloud.$style.innerHTML = Oom3Cloud.fullyInheritedStyle
-// Oom3Cloud.$style.innerHTML = `
-// /* Begin styles inherited from components/oom-3/oom-3.html */
-// ${Oom3.$style.innerHTML}
-// /* End styles inherited from components/oom-3/oom-3.html */
-//
-// ${Oom3Cloud.$style.innerHTML}
-// `
 
-
+//// Define the <oom-3-cloud> custom element.
 customElements.define('oom-3-cloud', Oom3Cloud)
 
 export { Oom3Cloud }

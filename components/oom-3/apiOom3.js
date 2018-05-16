@@ -10,12 +10,18 @@ const apiOom3 = {
             parser: parse.enum
           , onChange: [on.change]
           , valid:['none','red','green','blue']
-          , linkedElements: ['main']
+          , linkedElements: ['marker']
         }
     }
   , elements: {
-        main: '.main'
-      , shadow: '.shadow'
+        wrap: { selector:'.wrap' }
+      , hitzone: { selector:'.hitzone' }
+      , main: { selector:'.main' }
+      , silhouette: { selector:'.silhouette' }
+      , surround: { selector:'.surround' }
+      , ground: { selector:'.ground' }
+      , shadow: { selector:'.shadow' }
+      , marker: { selector:'.marker' }
     }
 }
 
@@ -28,13 +34,15 @@ export { apiOom3 }
 
 function onXYZChange (evt) {
     const { x, y, z } = this.oom.instance
-    this.oom.$.main.style.transform =
+    this.oom.$.wrap.style.transform =
         `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin)`
-    this.oom.$.shadow.style.transform =
-        `translate3d(${x}vmin, 72vmin, ${-z}vmin) scaleZ(0.5) rotateX(90deg)`
+    this.oom.$.ground.style.transform =
+        `translate3d(${x}vmin, 72vmin, ${-z}vmin)`
 }
 
 function onZChange (evt) {
     const { z } = this.oom.instance
-    this.oom.$.main.style.zIndex = 97 - ~~z
+    this.oom.$.wrap.style.zIndex = 97 - ~~z
+    this.oom.$.silhouette.style.opacity = z / 200 // fog effect on top of .main
+    this.oom.$.shadow.style.opacity = (200-z) / 200 // fog effect on .shadow
 }
