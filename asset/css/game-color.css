@@ -2,6 +2,8 @@
 
 :root {
     --fog-color: #49A0E7;
+    --hover-surround-color: #3cf;
+    --shadow-color: #49A0E7cc;
 }
 
 html, body {
@@ -35,10 +37,10 @@ html, body {
 
 /* SQUARE */
 
-.game-square {
+.oom-container {
 }
 
-#clearing {
+.location {
     background: #fff9;
     box-shadow: #fff9 0 0 5vmin 5vmin;
 }

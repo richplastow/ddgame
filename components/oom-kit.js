@@ -1,4 +1,4 @@
-const parse = {}, on = {}
+const parse = {}, on = {}, clamp = {}
 
 
 
@@ -36,4 +36,16 @@ on.change = function (evt) {
 
 
 
-export { parse, on }
+//// CLAMPS
+
+clamp.unit = function (v) {
+    return Math.max( 0, Math.min(1, v) )
+}
+
+//// Chrome halts briefly when an element switches from/to zero opacity.
+clamp.opacity = function (v) {
+    return Math.max( 0.01, Math.min(1, v) )
+}
+
+
+export { parse, on, clamp }

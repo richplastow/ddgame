@@ -1,0 +1,63 @@
+<!DOCTYPE HTML><html lang="en-GB">
+<head><meta charset="utf-8">
+<title>Oom3Location Demo</title>
+
+<style>
+    :root {
+        --fog-color: #a9c;
+        --front-color: #96a;
+        --hover-surround-color: #cf9;
+    }
+    body {
+        margin: 0;
+        font: 18px Arial;
+        color: var(--fog-color);
+    }
+    .oom-container {
+        position: absolute;
+        top: 50%; left: 50%; width: 96vmin; height: 96vmin;
+        margin: -48vmin 0 0 -48vmin;
+        background: linear-gradient(
+            #9c6, var(--hover-surround-color) 11%,
+            var(--fog-color) 12%, var(--front-color) 75%
+        );
+        border-radius: 2vmin;
+        perspective-origin: 50% -10%;
+        perspective: 80vmin;
+        overflow: hidden;
+    }
+</style>
+
+<!-- Polyfill ‘HTML Imports’ for legacy browsers -->
+<script src="../../asset/js/webcomponents-lite.js"></script>
+
+<!-- Import ‘oom.html’ which will load each <oom-3-*> component -->
+<link rel="import" href="../oom.html">
+
+</head><body class="oom-dev">
+
+
+<div class="oom-container">
+
+  <!-- Use the component -->
+  <oom-3-location x="-100" y="-48" z="148" rx="90" windpath="ns"></oom-3-location>
+  <oom-3-location x="-100" y="-48" z="48" rx="90" windpath="ne"></oom-3-location>
+  <oom-3-location x="0" y="-48" z="48" rx="90" windpath="wn"></oom-3-location>
+  <oom-3-location x="0" y="-48" z="148" rx="90" windpath="se"></oom-3-location>
+  <oom-3-location x="100" y="-48" z="148" rx="90" windpath="we"></oom-3-location>
+  <oom-3-location x="100" y="-48" z="48" rx="90" windpath="cyclone"></oom-3-location>
+<!--
+  <oom-3-location x="-100" y="48" z="148" rx="90" windpath="ns"></oom-3-location>
+  <oom-3-location x="-100" y="48" z="48" rx="90" windpath="ne"></oom-3-location>
+  <oom-3-location x="0" y="48" z="48" rx="90" windpath="wn"></oom-3-location>
+  <oom-3-location x="0" y="48" z="148" rx="90" windpath="se"></oom-3-location>
+  <oom-3-location x="100" y="48" z="148" rx="90" windpath="we"></oom-3-location>
+  <oom-3-location x="100" y="48" z="48" rx="90" windpath="cyclone"></oom-3-location> -->
+
+</div>
+
+<h1 style="position:absolute; width:100%; text-align:center; z-index:99">
+  Oom3Location Demo
+</h1>
+
+</body></html>

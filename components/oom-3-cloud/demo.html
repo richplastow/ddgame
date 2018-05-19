@@ -6,19 +6,20 @@
     :root {
         --fog-color: #9a3;
         --hover-surround-color: #dfc;
+        --shadow-color: #906c;
     }
     body {
         margin: 0;
         font: 18px Arial;
         color: #906;
     }
-    .game-square {
+    .oom-container {
         position: absolute;
         top: 50%; left: 50%; width: 96vmin; height: 96vmin;
         margin: -48vmin 0 0 -48vmin;
         background: linear-gradient(
-            #fa9, var(--hover-surround-color) 15%,
-            var(--fog-color) 16%, #ca6 75%
+            #fa9, var(--hover-surround-color) 11%,
+            var(--fog-color) 12%, #ca6 75%
         );
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
@@ -38,19 +39,13 @@
 <!-- Polyfill ‘HTML Imports’ for legacy browsers -->
 <script src="../../asset/js/webcomponents-lite.js"></script>
 
-<!--
-Import ‘oom.html’ which will:
-1. Define the #oom-3 template
-2. Load a JS module defining:
-  - The Oom3 class
-  - The <oom-3> custom element
--->
+<!-- Import ‘oom.html’ which will load each <oom-3-*> component -->
 <link rel="import" href="../oom.html">
 
 </head><body class="oom-dev">
 
 
-<div class="game-square">
+<div class="oom-container">
   <div id="clearing"></div>
   <oom-3 x="10" y="0" z="0" title="Front Left" marker="green"></oom-3>
 

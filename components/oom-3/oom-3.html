@@ -25,7 +25,9 @@ A generic 3D container, which all visible 3D objects should extend.
     .wrap {
         width: 0; height: 0; top: 0; left: 0;
         outline: none!important; /* on focus */
-        cursor: pointer;
+        /* perspective-origin: 48vmin -10vmin;
+        perspective: 80vmin; */
+        transform-style: preserve-3d;
     }
 
     /* HITZONE */
@@ -86,8 +88,8 @@ A generic 3D container, which all visible 3D objects should extend.
     .shadow {
         width: 0.4vmin; height: 0.4vmin; top: -0.2vmin; left: -0.2vmin;
         border-radius: 10vmin;
-        background: #0006;
-        box-shadow: #0006 0 0 3vmin 2vmin;
+        background: var(--shadow-color);
+        box-shadow: var(--shadow-color) 0 0 3vmin 2vmin;
         transform: rotateX(80deg);
     }
   </style>

@@ -1,11 +1,12 @@
-import { parse, on } from '../oom-kit.js'
+import { parse, on, clamp } from '../oom-kit.js'
 
 const apiOom3 = {
     name: 'oom-3'
   , attributes: {
-        x: { parser:parse.number, onChange:[onXYZChange] }
-      , y: { parser:parse.number, onChange:[onXYZChange] }
-      , z: { parser:parse.number, onChange:[onXYZChange,onZChange] }
+        x:  { parser:parse.number, onChange:[onXYZRXChange] }
+      , y:  { parser:parse.number, onChange:[onXYZRXChange] }
+      , z:  { parser:parse.number, onChange:[onXYZRXChange,onZChange] }
+      , rx: { parser:parse.number, onChange:[onXYZRXChange] }
       , marker: {
             parser: parse.enum
           , onChange: [on.change]
@@ -32,17 +33,17 @@ export { apiOom3 }
 
 //// EVENT HANDLERS
 
-function onXYZChange (evt) {
-    const { x, y, z } = this.oom.instance
+function onXYZRXChange (evt) {
+    const { x, y, z, rx } = this.oom.instance
     this.oom.$.wrap.style.transform =
-        `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin)`
+        `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin) rotateX(${rx}deg)`
     this.oom.$.ground.style.transform =
         `translate3d(${x}vmin, 72vmin, ${-z}vmin)`
 }
 
 function onZChange (evt) {
-    const { z } = this.oom.instance
+    const { z } = this.oom.instance //@TODO relative to camera
     this.oom.$.wrap.style.zIndex = 97 - ~~z
-    this.oom.$.silhouette.style.opacity = z / 200 // fog effect on top of .main
-    this.oom.$.shadow.style.opacity = (200-z) / 200 // fog effect on .shadow
+    this.oom.$.silhouette.style.opacity = clamp.opacity(z / 200) // fog effect on top of .main
+    this.oom.$.shadow.style.opacity = clamp.opacity( (200-z) / 200 ) // fog effect on .shadow
 }

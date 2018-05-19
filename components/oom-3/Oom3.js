@@ -20,6 +20,9 @@ class Oom3 extends HTMLElement {
         //// All Oom custom elements have an `oom` property.
         this.oom = {
             instance: {} // mostly parsed and cast from attributes
+          , initially: {} // permanent record of `instance` at instantiation
+          , target: {} // may be used during transitions, or to hold temp values
+          , misc: {} //@TODO get rid of this?
           , $: {} // handy references to sub-elements
           , Class: this.constructor
           , api
@@ -39,8 +42,16 @@ class Oom3 extends HTMLElement {
         for (const name in api.attributes)
             this.attributeChangedCallback(name)
 
+        //// Make a permanent record of `instance` at instantiation.
+        this.oom.initially = Object.assign({}, this.oom.instance)
+
+        //// Target values begin identically to the `instance` values.
+        this.oom.target = Object.assign({}, this.oom.instance)
+
         //// Listen for user events (typically mouse clicks, etc).
-        this.addEventListener( 'click', e => this.setAttribute('y', -2) )
+        this.oom.$.hitzone.addEventListener(
+            'click', e => this.setAttribute('y', -2)
+        )
 
     }
 

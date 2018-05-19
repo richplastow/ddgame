@@ -147,22 +147,22 @@ html, body {
 
 /* SQUARE */
 
-.game-square-wrap {
+.oom-container-wrap {
     text-align: center;
     vertical-align: middle;
 }
-.game-square {
+.oom-container {
     display: inline-block;
 }
 
 @media screen and (orientation: landscape) {
-    .game-square-wrap {
+    .oom-container-wrap {
         width: 100vmin;
         height: 100vmin;
         min-width: 100vmin;
         padding: 1vmin 0 0 0;
     }
-    .game-square {
+    .oom-container {
         width: 96vmin;
         height: 96vmin;
         border-radius: 2vmin;
@@ -170,12 +170,12 @@ html, body {
 }
 
 @media screen and (orientation: portrait) {
-    .game-square-wrap {
+    .oom-container-wrap {
         width: 100vmin;
         height: 100vmin;
         padding: 1vmin 0 0 0;
     }
-    .game-square {
+    .oom-container {
         width: 96vmin;
         height: 96vmin;
         border-radius: 2vmin;

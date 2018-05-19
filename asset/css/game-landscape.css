@@ -1,18 +1,41 @@
 /* LANDSCAPE FOR game.html */
 
-.game-square {
+.oom-container {
     /* background: linear-gradient(#c9f, #ecf 15%, #acb 16%, #cfd 75%); */
     position: absolute;
     top: 50%; left: 50%; width: 96vmin; height: 96vmin;
     margin: -48vmin 0 0 -48vmin;
-    perspective-origin: 50% -10%;
+    perspective-origin: 48vmin -10vmin;
     perspective: 80vmin;
 }
 
-#clearing {
+.camera {
+}
+
+.scene {
+    transform-style: preserve-3d;
+    transform: translate3d(0,0,0);
+    transition: transform 0.5s;
+}
+
+oom-3-location {
+    /* transform-style: preserve-3d; */
+}
+
+/*
+.location {
     position: absolute;
     width: 96vmin;
     height: 96vmin;
     transform-origin: center;
+}
+
+#location-1 {
+    border-radius: 0 80vmin 0 0;
     transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
 }
+#location-2 {
+    border-radius: 80vmin 0 0 0;
+    transform: translate3d(-100vmin,24vmin,-48vmin) rotateX(90deg);
+}
+*/
