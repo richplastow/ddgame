@@ -1,3 +1,6 @@
+import { progress } from '../../asset/js/progress.js'
+progress('components/oom-3/apiOom3Cloud.js')
+
 import { parse, on } from '../oom-kit.js'
 import { apiOom3 } from '../oom-3/apiOom3.js'
 

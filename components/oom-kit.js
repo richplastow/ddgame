@@ -1,3 +1,7 @@
+import { progress } from '../asset/js/progress.js'
+progress('components/oom-kit.js')
+
+
 const parse = {}, on = {}, clamp = {}
 
 

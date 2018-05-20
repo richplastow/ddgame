@@ -1,3 +1,4 @@
+import { progress } from './progress.js'; progress('asset/js/spawn.js')
 import { $$clouds, $$balloons, $scene } from './elements.js'
 
 const spawn = { }

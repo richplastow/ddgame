@@ -1,7 +1,17 @@
 //@TODO import config from './config.js'
+import { progress } from './progress.js'; progress('asset/js/boot.js')
 import { state } from './state.js'
 import { spawn } from './spawn.js'
-import { $me, $scene, $$locations, $$balloons, $$clouds } from './elements.js'
+import { $body, $me, $scene, $$locations, $$balloons, $$clouds } from './elements.js'
+
+
+//// Start animating 2 seconds after 'progress' reaches 100%.
+if ( $body.classList.contains('oom-progress-100') )
+    setTimeout( () => { state.isAnimating = true }, 1000 )
+else
+    window.addEventListener('oom-progress-100'
+      , () => { setTimeout( () => { state.isAnimating = true }, 1000 ) } )
+
 
 //// Poll for the balloon’s Shadow DOM to be ready. @TODO better than polling?
 new Promise( (resolve, reject) => {
@@ -42,9 +52,11 @@ new Promise( (resolve, reject) => {
 
     //// Modify the scene.
     let then
+    animate()
     function animate (now) {
 
-        if (state.isPlaying) window.requestAnimationFrame(animate)
+        window.requestAnimationFrame(animate)
+        if (! state.isAnimating) return // eg waiting for progress to reach 100%
 
         if (! then) { then = now; return }
         const diff = now - then
@@ -81,7 +93,6 @@ new Promise( (resolve, reject) => {
         }
 
     }
-    animate()
 })
 
 
@@ -444,7 +455,7 @@ function linearWindVectorFnFactory (windpath) {
 
         const d = getD(x, z)
 
-        //// Too close to the corner.
+        //// Too close to an edge.
         if (10 > d || 90 < d) {
             // document.title = 'too edgy: ' + d
             return getTooEdgyVector(d)
@@ -453,6 +464,79 @@ function linearWindVectorFnFactory (windpath) {
         //// In the proper area - drift inwards.
         // document.title = 'proper lane: ' + d
         return getLinearVector(d)
+    }
+
+}
+
+
+function circularWindVectorFnFactory (windpath) {
+
+    //// `c` reverses wind direction for anticyclones.
+    const
+        c = 'anticyclone' === windpath ? 1 : -1
+      , drift1 = 'anticyclone' === windpath ? 5e3 : 4e3
+      , drift2 = 'anticyclone' === windpath ? 4e3 : 5e3
+
+    //// Create and return the windVectorFn().
+    return (x, z) => {
+        let
+            sdx = 50 - x // signed x-distance from center to point
+          , sdz = 50 - z
+          , dc = Math.sqrt(sdx*sdx + sdz*sdz) // distance to center
+
+
+        //// Don’t get stuck in the exact center!
+        if (1 > dc)
+            x = 51, z = 51, sdx = sdz = 1, dc = Math.sqrt(2)
+
+        //// Too far from the center.
+        if (50 < dc) {
+            // document.title = 'too far from center: ' + dc
+            const
+                m = dc - 40 // 71 -> 31, 50 -> 10
+              , sx = x < 50 ? +1 : -1 // for pushing towards the center
+              , sz = z < 50 ? +1 : -1
+            return {
+                vx: sx * m * dc / 5e5
+              , vz: sz * m * dc / 5e5
+            }
+        }
+
+        //   NW    |
+        //         |     NE
+        //         |
+        // --------+--------
+        //         |
+        //         |
+        //     SW  |  SE
+        //
+        // NEx=80, NEz=70, NEdx=+30, NEdz=+20, NEvx=+0.2, NEvz=-0.3, +, -
+        // SEx=60, SEz=10, SEdx=+10, SEdz=-40, SEvx=-0.4, SEvz=-0.1, +, -
+        // NWx=20, NWz=90, NWdx=-30, NWdz=+40, NWvx=+0.4, NWvz=+0.3, +, -
+        // SWx=30, SWz=10, SWdx=-20, SWdz=-40, SWvx=-0.4, SWvz=+0.2, +, -
+
+        //// In the inside lane - drift outwards.
+        if (30 > dc) {
+            // document.title=`${50<x?50<z?'NE':'SE':50<z?'NW':'SW'} inside lane: `+dc
+            return 50 < x ? 50 < z
+              ?
+                    { vx: c * sdz / drift1, vz: c * -sdx / drift2 } // NE
+                  : { vx: c * sdz / drift2, vz: c * -sdx / drift1 } // SE
+              : 50 < z
+                  ? { vx: c * sdz / drift2, vz: c * -sdx / drift1 } // NW
+                  : { vx: c * sdz / drift1, vz: c * -sdx / drift2 } // SW
+        }
+
+        //// In the outside lane - drift inwards.
+        // document.title=`${50<x?50<z?'NE':'SE':50<z?'NW':'SW'} outside lane: `+dc
+        return 50 < x ? 50 < z
+          ?
+                { vx: c * sdz / drift2, vz: c * -sdx / drift1 } // NE
+              : { vx: c * sdz / drift1, vz: c * -sdx / drift2 } // SE
+          : 50 < z
+              ? { vx: c * sdz / drift1, vz: c * -sdx / drift2 } // NW
+              : { vx: c * sdz / drift2, vz: c * -sdx / drift1 } // SW
+
     }
 
 }
@@ -474,8 +558,8 @@ const windVectorFns = {
   , we: linearWindVectorFnFactory('we')
   , ew: linearWindVectorFnFactory('ew')
 
-  , cyclone: function () { return { vx:0, vz:0 } }
-  , anticyclone: function () { return { vx:0, vz:0 } }
+  , cyclone: circularWindVectorFnFactory('cyclone')
+  , anticyclone: circularWindVectorFnFactory('anticyclone')
 }
 
 
@@ -483,7 +567,7 @@ const windVectorFns = {
 function getWindVector (diff, windpath, x, z) {
     diff *= 4
     if (! windVectorFns[windpath]) {
-        state.isPlaying = false
+        state.isAnimating = false
         return console.error(`No such windVectorFns.${windpath}()`)
     }
     const { vx, vz } = windVectorFns[windpath](x, z)

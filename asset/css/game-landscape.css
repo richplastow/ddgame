@@ -7,6 +7,12 @@
     margin: -48vmin 0 0 -48vmin;
     perspective-origin: 48vmin -10vmin;
     perspective: 80vmin;
+    opacity: 0;
+    transition: opacity 1s 1s;
+}
+
+body.oom-progress-100 .oom-container {
+    opacity: 1;
 }
 
 .camera {

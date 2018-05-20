@@ -1,0 +1,35 @@
+{
+  "name": "ddgame",
+  "version": "0.1.4",
+  "description": "A simple multiplayer online hide-and-seek game",
+  "main": "asset/js/boot.js",
+  "directories": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richplastow/ddgame.git"
+  },
+  "keywords": [
+    "Oom",
+    "🔅",
+    "Interactive",
+    "🌟",
+    "3d",
+    "🍍",
+  ],
+  "author": "Rich Plastow <rich@richplastow.com> (http://richplastow.com/)",
+  "contributors": [
+    "Loop.Coop <info@loop.coop> (https://loop.coop/)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richplastow/ddgame.git/issues"
+  },
+  "homepage": "http://richplastow/ddgame/"
+}
