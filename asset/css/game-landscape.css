@@ -15,6 +15,10 @@ body.oom-progress-100 .oom-container {
     opacity: 1;
 }
 
+body.ffx .oom-container {
+    display: none; /* Firefox is not supported */
+}
+
 .camera {
 }
 

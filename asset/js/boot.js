@@ -4,96 +4,101 @@ import { state } from './state.js'
 import { spawn } from './spawn.js'
 import { $body, $me, $scene, $$locations, $$balloons, $$clouds } from './elements.js'
 
+// Boot the app (Firefox is not supported).
+if (! document.body.classList.contains('ffx') ) boot()
 
-//// Start animating 2 seconds after 'progress' reaches 100%.
-if ( $body.classList.contains('oom-progress-100') )
-    setTimeout( () => { state.isAnimating = true }, 1000 )
-else
-    window.addEventListener('oom-progress-100'
-      , () => { setTimeout( () => { state.isAnimating = true }, 1000 ) } )
+function boot () {
+
+    //// Start animating 2 seconds after 'progress' reaches 100%.
+    if ( $body.classList.contains('oom-progress-100') )
+        setTimeout( () => { state.isAnimating = true }, 1000 )
+    else
+        window.addEventListener('oom-progress-100'
+          , () => { setTimeout( () => { state.isAnimating = true }, 1000 ) } )
 
 
-//// Poll for the balloon’s Shadow DOM to be ready. @TODO better than polling?
-new Promise( (resolve, reject) => {
-    let iterations = 0, interval = 10
-    function pollBalloonReady () {
-        setTimeout( function () {
-            const $el = document.querySelector('#me')
-            if ($el.shadowRoot)
-                resolve()
-            else if (100 < ++iterations)
-                reject(`Balloon not ready after ${interval*(iterations-1)}ms`)
-            else
-                pollBalloonReady()
-        },interval)
-    }
-    pollBalloonReady()
-})
-.catch(reason => { console.error(reason) })
-.then( () => {
-
-    // const
-        // $bodyclass = $('body').classList
-      // , me = { $el:$('#me'), going:null,
-      //       global: { x:80, y:0, z:20 }
-      //     , location: { x:80, y:0, z:20 } // relative to the current location
-      //   }
-
-    //// Deal with keypresses.
-    // window.addEventListener('keydown', e => {
-    //     me.going = ({ 38:'n', 39:'e', 40:'s', 37:'w' }[e.keyCode]) || me.going
-    //     $bodyclass.remove('n','e','s','w')
-    //     $bodyclass.add(me.going)
-    // })
-    // window.addEventListener('keyup', e => {
-    //     me.going = null
-    //     $bodyclass.remove('n','e','s','w')
-    // })
-
-    //// Modify the scene.
-    let then
-    animate()
-    function animate (now) {
-
-        window.requestAnimationFrame(animate)
-        if (! state.isAnimating) return // eg waiting for progress to reach 100%
-
-        if (! then) { then = now; return }
-        const diff = now - then
-        then = now
-
-        //// Possibly spawn a balloon or a cloud.
-        const randSpawn = Math.random()
-        if (0.005 > randSpawn && 10 > $$balloons.length)
-            spawn.balloons(1)
-        else if (0.03 > randSpawn && 30 > $$clouds.length)
-            spawn.clouds(1)
-
-        //// Update clouds and balloons’ locations - they may have crossed a
-        //// boundary on the last frame.
-        resetTargets()
-        updateLocations()
-
-        //// Apply various forces.
-        applyWind(diff)
-        applyMomentum(diff)
-        applyBurner(diff)
-        applyGuards(diff)
-
-        //// Move all clouds and balloons to their new positions.
-        updatePositions()
-
-        ////
-        // animateGameplay(me, diff)
-
-        //// Firefox-only...
-        if (! $scene) {
-            tweenCamera(diff)
-            tweenLocations(diff)
+    //// Poll for the balloon’s Shadow DOM to be ready. @TODO better than polling?
+    new Promise( (resolve, reject) => {
+        let iterations = 0, interval = 10
+        function pollBalloonReady () {
+            setTimeout( function () {
+                const $el = document.querySelector('#me')
+                if ($el.shadowRoot)
+                    resolve()
+                else if (100 < ++iterations)
+                    reject(`Balloon not ready after ${interval*(iterations-1)}ms`)
+                else
+                    pollBalloonReady()
+            },interval)
         }
+        pollBalloonReady()
+    })
+    .catch(reason => { console.error(reason) })
+    .then( () => {
 
-    }
-})
+        // const
+            // $bodyclass = $('body').classList
+          // , me = { $el:$('#me'), going:null,
+          //       global: { x:80, y:0, z:20 }
+          //     , location: { x:80, y:0, z:20 } // relative to the current location
+          //   }
+
+        //// Deal with keypresses.
+        // window.addEventListener('keydown', e => {
+        //     me.going = ({ 38:'n', 39:'e', 40:'s', 37:'w' }[e.keyCode]) || me.going
+        //     $bodyclass.remove('n','e','s','w')
+        //     $bodyclass.add(me.going)
+        // })
+        // window.addEventListener('keyup', e => {
+        //     me.going = null
+        //     $bodyclass.remove('n','e','s','w')
+        // })
+
+        //// Modify the scene.
+        let then
+        animate()
+        function animate (now) {
+
+            window.requestAnimationFrame(animate)
+            if (! state.isAnimating) return // eg waiting for progress to reach 100%
+
+            if (! then) { then = now; return }
+            const diff = now - then
+            then = now
+
+            //// Possibly spawn a balloon or a cloud.
+            const randSpawn = Math.random()
+            if (0.005 > randSpawn && 10 > $$balloons.length)
+                spawn.balloons(1)
+            else if (0.03 > randSpawn && 30 > $$clouds.length)
+                spawn.clouds(1)
+
+            //// Update clouds and balloons’ locations - they may have crossed a
+            //// boundary on the last frame.
+            resetTargets()
+            updateLocations()
+
+            //// Apply various forces.
+            applyWind(diff)
+            applyMomentum(diff)
+            applyBurner(diff)
+            applyGuards(diff)
+
+            //// Move all clouds and balloons to their new positions.
+            updatePositions()
+
+            ////
+            // animateGameplay(me, diff)
+
+            //// Firefox-only...
+            if (! $scene) {
+                tweenCamera(diff)
+                tweenLocations(diff)
+            }
+
+        }
+    })
+}
 
 
 function resetTargets() {

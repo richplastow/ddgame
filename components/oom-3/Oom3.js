@@ -1,7 +1,6 @@
 import { apiOom3 } from './apiOom3.js'
 
 
-//// Define the oom3 class.
 class Oom3 extends HTMLElement {
     static get api () { return apiOom3 }
     static get parent () { return HTMLElement } //@TODO is there a JS built-in ref?

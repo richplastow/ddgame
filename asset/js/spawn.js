@@ -7,8 +7,12 @@ function spawnElements (tally, tag, arr, setRandomElementAttributes) {
 
     //// Firefox does not apply `transform-style: preserve-3d;` correctly, so
     //// the clouds and balloons etc cannot be nested inside multiple <div>s.
+    //// @TODO start supporting Firefox when it can:
+    //// 1. show custom-elements when they are dynamically created
+    //// 2. show @keyframe CSS animations on custom-elements
+    //// ...by that time, `transform-style: preserve-3d;` may be working
     const $domEl =
-        // document.body.classList.contains('is-firefox') ? $scene : $container
+        // document.body.classList.contains('ffx') ? $scene : $container
         $scene
 
     for (let i=0; i<tally; i++) {

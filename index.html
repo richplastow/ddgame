@@ -15,7 +15,7 @@
             maximum-scale=1.0, user-scalable=no">
 
 <!-- Search engine meta -->
-<title>DD Game 0.1.4</title>
+<title>DD Game 0.1.5</title>
 <meta name="description"
    content="A simple multiplayer online hide-and-seek game">
 <link rel="author" href="README.md">
@@ -94,9 +94,11 @@
 <body class="oom-dev">
 
 
-<!-- Firefox needs special -->
-<script>if(0<navigator.userAgent.indexOf('Firefox'))document.body.classList.add(
-'is-firefox')</script>
+<!-- Firefox is not currently supported :-( -->
+<script>if(navigator.mozGetUserMedia)document.body.classList.add('ffx')</script>
+<style>.ffonly{position:fixed;display:none;padding:3vmin;left:0;right:0;z-index:
+999999;background:#fca;text-align:center}body.ffx .ffonly{display:block}</style>
+<p class="ffonly">Firefox is not currently supported. Please switch browser!</p>
 
 
 <div class="oom-container">

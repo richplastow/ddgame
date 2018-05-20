@@ -20,7 +20,7 @@ function createEl () {
     position: fixed;
     top: 0; left: 0; right: 0; height: 10px;
     background: var(--progress-outer, #000);
-    z-index: 999999;
+    z-index: 99999;
     transition: opacity 1s 1s, visibility 2s 0s;
     cursor: pointer;
 }

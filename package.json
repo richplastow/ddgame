@@ -1,6 +1,6 @@
 {
   "name": "ddgame",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A simple multiplayer online hide-and-seek game",
   "main": "asset/js/boot.js",
   "directories": {
