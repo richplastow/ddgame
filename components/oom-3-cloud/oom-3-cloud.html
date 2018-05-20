@@ -26,6 +26,10 @@ A fluffy cloud, to hide your balloon behind.
     }
 
     /* MAIN */
+    .main .blob {
+        border: 1px solid red;
+        animation: wobble 2.5s ease-in infinite;
+    }
     .wrap.weather-fair .main .blob { background: #fff; }
     .wrap.weather-storm .main .blob { background: #999; }
     .wrap.weather-lightning .main .blob { background: #333; }
@@ -42,6 +46,12 @@ A fluffy cloud, to hide your balloon behind.
     .shadow.weather-lightning {
         background: #000;
         box-shadow: #000 0 0 4vmin 4vmin, var(--shadow-color) 0 0 4vmin 4vmin;
+    }
+
+    @keyframes wobble {
+          0% { border: 1px solid red; }
+         50% { border: 4px solid blue; }
+        100% { border: 1px solid red; }
     }
 
   </style>

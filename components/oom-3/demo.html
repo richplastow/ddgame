@@ -67,4 +67,15 @@
   Oom3 Demo
 </h1>
 
+<script>{
+const d=document, $=d.querySelector.bind(d)
+$('#clearing').addEventListener('click',function(e){
+    $el=d.createElement('oom-3')
+    $el.setAttribute( 'x', Math.random()*100 )
+    $el.setAttribute( 'z', Math.random()*100 )
+    $el.setAttribute('marker','red,green,blue'.split(',')[~~(Math.random()*3)])
+    $('.oom-container').appendChild($el)
+})}</script>
+
+
 </body></html>
