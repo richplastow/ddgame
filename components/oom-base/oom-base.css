@@ -1,0 +1,11 @@
+/* GENERAL */
+div {
+    position: absolute;
+    width: 0; height: 0;
+    overflow: visible!important;
+    box-sizing: content-box; /* Bootstrap sets `* { box-sizing: border-box }` */
+}
+
+.main {
+    /* width: 100px; height:100px; background: blue; */
+}

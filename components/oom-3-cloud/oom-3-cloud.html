@@ -9,41 +9,9 @@ A fluffy cloud, to hide your balloon behind.
 
 <!-- 1. Define the #oom-3-cloud template -->
 <template id="oom-3-cloud">
-  <style>
 
-    /* GENERAL */
-    .blob {
-        border-radius: 10vmin;
-    }
-    .mid.blob {
-        width: 8vmin; height: 8vmin; top: -10vmin; left: -4vmin;
-    }
-    .left.blob {
-        width: 5vmin; height: 5vmin; top: -7.5vmin; left: -6vmin;
-    }
-    .right.blob {
-        width: 6.5vmin; height: 6.5vmin; top: -9.5vmin; left: 0vmin;
-    }
-
-    /* MAIN */
-    .wrap.weather-fair .main .blob { background: #fff; }
-    .wrap.weather-storm .main .blob { background: #999; }
-    .wrap.weather-lightning .main .blob { background: #333; }
-
-    /* SHADOW */
-    .shadow.weather-fair {
-        background: #0004;
-        box-shadow: #0004 0 0 4vmin 4vmin, var(--shadow-color) 0 0 4vmin 4vmin;
-    }
-    .shadow.weather-storm {
-        background: #0009;
-        box-shadow: #0009 0 0 4vmin 4vmin, var(--shadow-color) 0 0 4vmin 4vmin;
-    }
-    .shadow.weather-lightning {
-        background: #000;
-        box-shadow: #000 0 0 4vmin 4vmin, var(--shadow-color) 0 0 4vmin 4vmin;
-    }
-  </style>
+  <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
+  <link rel="stylesheet" href="../../components/oom-3-cloud/oom-3-cloud.css">
 
   <div class="wrap" tabindex="1">
     <div class="hitzone">
@@ -81,4 +49,4 @@ A fluffy cloud, to hide your balloon behind.
 <!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-3-cloud/Oom3Cloud.js')})))(document,'oom.html')</script>
+,'oom-3-cloud/Oom3Cloud.js')})))(document,'oom-all.html')</script>

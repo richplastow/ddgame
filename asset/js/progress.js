@@ -2,7 +2,7 @@
 //// the progress bar reaches 100%. Also, throws an exception if more modules
 //// than expected load.
 
-const paths = {}, expected = 10
+const paths = {}, expected = 12
 let remaining = expected
 let $inner
 createEl()
@@ -56,7 +56,6 @@ function progress (path) {
     //// Reduce the tally and update the `progress.percent` property.
     remaining--
     progress.percent = 100 - ~~(remaining / expected * 100)
-    console.log(progress.percent, path);
 
     //// Update the progress-bar.
     setTimeout( () => {

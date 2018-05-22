@@ -9,68 +9,9 @@ A gameplay area, usually containing a prevailing wind.
 
 <!-- 1. Define the #oom-3-location template -->
 <template id="oom-3-location">
-  <style>
 
-    /* GENERAL */
-    .silhouette, .surround, .ground {
-        display: none;
-    }
-
-    /* WRAP */
-    .wrap {
-        width: 96vmin; height: 96vmin; top: 0; left: 0;
-        z-index: -99999!important;
-    }
-
-    /* MAIN */
-    .main {
-        opacity: 0.5;
-        /* filter: blur(4vmin); */
-    }
-    .main .mid, .main .lug {
-        background: #fff;
-    }
-    .main .mid {
-        width: 90vmin; height: 90vmin; top: 3vmin; left: 3vmin;
-        /* box-shadow: #fff 0 0 9vmin 7vmin */
-    }
-    .main .lug {
-        /* box-shadow: #fff9 3vmin -12vmin 30vmin 10vmin; */
-    }
-    .main .n.lug {
-        width: 90vmin; height: 5vmin; top: -2vmin; left: 3vmin;
-    }
-    .main .e.lug {
-        width: 5vmin; height: 90vmin; top: 3vmin; left: 93vmin;
-    }
-    .main .s.lug {
-        width: 90vmin; height: 5vmin; top: 93vmin; left: 3vmin;
-    }
-    .main .w.lug {
-        width: 5vmin; height: 90vmin; top: 3vmin; left: -2vmin;
-    }
-
-    .wrap.windpath-cyclone .mid, .wrap.windpath-anticyclone .mid { border-radius: 45vmin }
-    .wrap.windpath-ne .mid, .wrap.windpath-en .mid { border-radius: 0 0 0 90vmin }
-    .wrap.windpath-es .mid, .wrap.windpath-se .mid { border-radius: 90vmin 0 0 0 }
-    .wrap.windpath-sw .mid, .wrap.windpath-ws .mid { border-radius: 0 90vmin 0 0 }
-    .wrap.windpath-wn .mid, .wrap.windpath-nw .mid { border-radius: 0 0 90vmin 0 }
-
-    .wrap.windpath-cyclone .lug, .wrap.windpath-anticyclone .lug { display: none }
-    .wrap.windpath-ns .e.lug, .wrap.windpath-ns .w.lug { display: none }
-    .wrap.windpath-sn .e.lug, .wrap.windpath-sn .w.lug { display: none }
-    .wrap.windpath-ew .n.lug, .wrap.windpath-ew .s.lug { display: none }
-    .wrap.windpath-we .n.lug, .wrap.windpath-we .s.lug { display: none }
-    .wrap.windpath-ne .s.lug, .wrap.windpath-ne .w.lug { display: none }
-    .wrap.windpath-en .s.lug, .wrap.windpath-en .w.lug { display: none }
-    .wrap.windpath-es .n.lug, .wrap.windpath-es .w.lug { display: none }
-    .wrap.windpath-se .n.lug, .wrap.windpath-se .w.lug { display: none }
-    .wrap.windpath-sw .n.lug, .wrap.windpath-sw .e.lug { display: none }
-    .wrap.windpath-ws .n.lug, .wrap.windpath-ws .e.lug { display: none }
-    .wrap.windpath-wn .e.lug, .wrap.windpath-wn .s.lug { display: none }
-    .wrap.windpath-nw .e.lug, .wrap.windpath-nw .s.lug { display: none }
-
-  </style>
+  <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
+  <link rel="stylesheet" href="../../components/oom-3-location/oom-3-location.css">
 
   <div class="wrap">
     <div class="hitzone"></div>
@@ -98,4 +39,4 @@ A gameplay area, usually containing a prevailing wind.
 <!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-3-location/Oom3Location.js')})))(document,'oom.html')</script>
+,'oom-3-location/Oom3Location.js')})))(document,'oom-all.html')</script>

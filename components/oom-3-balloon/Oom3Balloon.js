@@ -6,10 +6,6 @@ class Oom3Balloon extends Oom3 {
     static get parent () { return Oom3 } //@TODO is there a JS built-in ref?
 }
 
-
-//// Inherit styles from parent-class.
-Oom3Balloon.$style.innerHTML = Oom3Balloon.fullyInheritedStyle
-
 //// Define the <oom-3-balloon> custom element.
 customElements.define('oom-3-balloon', Oom3Balloon)
 

@@ -1,22 +1,7 @@
-import { apiOom3 } from './apiOom3.js'
-import { OomBase } from '../oom-base/OomBase.js'
+import { apiOomBase } from './apiOomBase.js'
 
-class Oom3 extends OomBase {
-    static get api () { return apiOom3 }
-    static get parent () { return OomBase } //@TODO is there a JS built-in ref?
-}
-
-//// Define the <oom-3> custom element.
-customElements.define('oom-3', Oom3)
-
-export { Oom3 }
-
-
-/*
-import { apiOom3 } from './apiOom3.js'
-
-class Oom3 extends HTMLElement {
-    static get api () { return apiOom3 }
+class OomBase extends HTMLElement {
+    static get api () { return apiOomBase }
     static get parent () { return HTMLElement } //@TODO is there a JS built-in ref?
 
     constructor() {
@@ -41,16 +26,6 @@ class Oom3 extends HTMLElement {
         for ( const [name, el] of Object.entries(elements) )
             if ('this' === name) throw Error(`invalid element name 'this'`)
             else this.oom.$[name] = this.shadowRoot.querySelector(el.selector)
-
-        //// Set up listeners.
-        for (const evtnames in listeners)
-            evtnames.split(' ').map( evtname => {
-                const listener = api.listeners[evtname]
-                listener.targets.split(' ').map( targetname =>
-                    ('this' === targetname ? this : this.oom.$[targetname])
-                       .addEventListener( evtname, listener.fn.bind(this) )
-                )
-            })
 
         //// Validate member names. For example, 'current' is an invalid name.
         for (const name in members)
@@ -94,6 +69,16 @@ class Oom3 extends HTMLElement {
             if (member.ATTRIBUTE)
                 this.attributeChangedCallback(name)
 
+        //// Set up listeners.
+        for (const evtnames in listeners)
+            evtnames.split(' ').map( evtname => {
+                const listener = api.listeners[evtname]
+                listener.targets.split(' ').map( targetname =>
+                    ('this' === targetname ? this : this.oom.$[targetname])
+                       .addEventListener( evtname, listener.fn.bind(this) )
+                )
+            })
+
         //@TODO maybe use these... need to deep-copy.
         // //// Make a permanent record of each property’s initial value.
         // this.oom.initially = Object.assign({}, this.oom.members)
@@ -113,13 +98,6 @@ class Oom3 extends HTMLElement {
             if (value.bind && 'updaters' !== key && null !==
                 ( parsed = value.bind(this)(this.getAttribute(attrName), attrName) )
             ) return parsed
-            // if (value.bind && 'updaters' !== key)
-            //     if (null !== (parsed = value.bind(this)(
-            //         this.getAttribute(attrName), attrName
-            //     ))) return parsed
-        // const
-        //     parser = this.constructor.api.members[attrName].parser.bind(this) // eg `v=>+v||0`
-        // return parser(this.getAttribute(attrName), attrName) // eg "1e2" to 100
     }
 
     //// Deals with an attribute being added, removed or changed.
@@ -145,13 +123,15 @@ class Oom3 extends HTMLElement {
     //// by the constructor().
     static get $template () {
         const
-            { name } = this.api // eg 'oom-3-foo'
+            { name } = this.api // eg 'oom-foo'
           , $baseLink = document.querySelector(
                 'link[rel="import"][href$="oom-all.html"]')
           , $subLink = $baseLink.import.querySelector(
                 `link[rel="import"][href$="${name}.html"]`)
         return $subLink.import.querySelector('#'+name)
     }
+
+/*
 
     //// The <style> element of the current class’s <template>.
     static get $style () {
@@ -162,7 +142,9 @@ class Oom3 extends HTMLElement {
     static get fullyInheritedStyle () {
         let out = ''
         if (this.parent.$style) out += `
+            /* Begin styles inherited from ${this.parent.api.name} *`+`/
             ${this.parent.$style.innerHTML}
+            /* End styles inherited from ${this.parent.api.name} *`+`/\n`
         out += this.$style.innerHTML
         return out
     }
@@ -188,11 +170,10 @@ class Oom3 extends HTMLElement {
           , `$1${suffix} $2`
         )
     }
-
+*/
 }
 
-//// Define the <oom-3> custom element.
-customElements.define('oom-3', Oom3)
+//// Define the <oom-base> custom element.
+customElements.define('oom-base', OomBase)
 
-export { Oom3 }
-*/
+export { OomBase }

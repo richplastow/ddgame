@@ -15,7 +15,7 @@
             maximum-scale=1.0, user-scalable=no">
 
 <!-- Search engine meta -->
-<title>DD Game 0.1.5</title>
+<title>DD Game 0.2.0</title>
 <meta name="description"
    content="A simple multiplayer online hide-and-seek game">
 <link rel="author" href="README.md">
@@ -84,8 +84,8 @@
 <!-- Polyfill Web Components for legacy browsers -->
 <script src="asset/js/webcomponents-lite.js"></script>
 
-<!-- Import ‘components/oom.html’ which will import all of Oom’s components -->
-<link rel="import" href="components/oom.html">
+<!-- Import ‘components/oom-all.html’ which will import all of Oom’s components -->
+<link rel="import" href="components/oom-all.html">
 
 
 
@@ -104,23 +104,23 @@
 <div class="oom-container">
   <div class="oom-camera">
     <div class="oom-scene">
-      <oom-3-location x="-100" y="-50"  z="50" rx="90" windpath="ew"></oom-3-location>
-      <oom-3-location x="-200" y="-50"  z="50" rx="90" windpath="en"></oom-3-location>
-      <oom-3-location x="-200" y="-50" z="150" rx="90" windpath="sn"></oom-3-location>
-      <oom-3-location x="-200" y="-50" z="250" rx="90" windpath="se"></oom-3-location>
-      <oom-3-location x="-100" y="-50" z="250" rx="90" windpath="ws"></oom-3-location>
-      <oom-3-location x="-100" y="-50" z="150" rx="90" windpath="ne"></oom-3-location>
-      <oom-3-location x=   "0" y="-50" z="150" rx="90" windpath="wn"></oom-3-location>
-      <oom-3-location x=   "0" y="-50" z="250" rx="90" windpath="se"></oom-3-location>
-      <oom-3-location x= "100" y="-50" z="250" rx="90" windpath="we"></oom-3-location>
-      <oom-3-location x= "200" y="-50" z="250" rx="90" windpath="ws"></oom-3-location>
-      <oom-3-location x= "200" y="-50" z="150" rx="90" windpath="ns"></oom-3-location>
-      <oom-3-location x= "200" y="-50" z= "50" rx="90" windpath="nw"></oom-3-location>
-      <oom-3-location x= "100" y="-50" z= "50" rx="90" windpath="ew"></oom-3-location>
-      <oom-3-location x=   "0" y="-50" z= "50" rx="90" windpath="ew"></oom-3-location>
-      <oom-3-location x= "100" y="-50" z="150" rx="90" windpath="cyclone"></oom-3-location>
-      <oom-3-location x="-300" y="-50" z="250" rx="90" windpath="anticyclone"></oom-3-location>
-      <oom-3-balloon id="me" upper="red" x="1" z="99" marker="none"></oom-3-balloon>
+      <oom-3-location x="-100" y="-50"   z="0" rx="90" windpath="ew"></oom-3-location>
+      <oom-3-location x="-200" y="-50"   z="0" rx="90" windpath="en"></oom-3-location>
+      <oom-3-location x="-200" y="-50" z="100" rx="90" windpath="sn"></oom-3-location>
+      <oom-3-location x="-200" y="-50" z="200" rx="90" windpath="se"></oom-3-location>
+      <oom-3-location x="-100" y="-50" z="200" rx="90" windpath="ws"></oom-3-location>
+      <oom-3-location x="-100" y="-50" z="100" rx="90" windpath="ne"></oom-3-location>
+      <oom-3-location x=   "0" y="-50" z="100" rx="90" windpath="wn"></oom-3-location>
+      <oom-3-location x=   "0" y="-50" z="200" rx="90" windpath="se"></oom-3-location>
+      <oom-3-location x= "100" y="-50" z="200" rx="90" windpath="we"></oom-3-location>
+      <oom-3-location x= "200" y="-50" z="200" rx="90" windpath="ws"></oom-3-location>
+      <oom-3-location x= "200" y="-50" z="100" rx="90" windpath="ns"></oom-3-location>
+      <oom-3-location x= "200" y="-50" z=  "0" rx="90" windpath="nw"></oom-3-location>
+      <oom-3-location x= "100" y="-50" z=  "0" rx="90" windpath="ew"></oom-3-location>
+      <oom-3-location x=   "0" y="-50" z=  "0" rx="90" windpath="ew"></oom-3-location>
+      <oom-3-location x= "100" y="-50" z="100" rx="90" windpath="cyclone"></oom-3-location>
+      <oom-3-location x="-300" y="-50" z="200" rx="90" windpath="anticyclone"></oom-3-location>
+      <oom-3-balloon id="me" upper="red" x="40" z="40" marker="none"></oom-3-balloon>
     </div>
   </div>
 </div>

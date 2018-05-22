@@ -1,23 +1,27 @@
+//// Tell the progress-bar that this file has loaded.
 import { progress } from '../../asset/js/progress.js'
 progress('components/oom-3/apiOom3Cloud.js')
 
-import { parse, on } from '../oom-kit.js'
+//// Import the super-class’s API and the Oom toolkit.
 import { apiOom3 } from '../oom-3/apiOom3.js'
+import { parse, update, constant } from '../oom-kit.js'
+const { Enum } = parse, { ATTRIBUTE } = constant
 
-const apiOom3Cloud = { name:'oom-3-cloud' }
-
-//// Merge <oom-3> attributes into <oom-3-cloud> attributes.
-apiOom3Cloud.attributes = Object.assign({}, apiOom3.attributes, {
-    weather: {
-        parser: parse.enum
-      , onChange: [on.change]
-      , valid: ['fair','storm','lightning']
-      , linkedElements: ['wrap','shadow']
+//// Define the API.
+const api = {
+    name: 'oom-3-cloud'
+  , elements: {}
+  , listeners: {}
+  , members: {
+        weather: { Enum, ATTRIBUTE
+          , valid: 'fair storm lightning'
+          , updaters: update.enum('wrap shadow')
+        }
     }
-})
+}
 
-//// Merge <oom-3> elements into <oom-3-cloud> elements.
-apiOom3Cloud.elements = Object.assign({}, apiOom3.elements, {
-})
-
-export { apiOom3Cloud }
+//// Merge with the super-class’s API, and export.
+api.elements  = Object.assign({}, apiOom3.elements , api.elements)
+api.listeners = Object.assign({}, apiOom3.listeners, api.listeners)
+api.members   = Object.assign({}, apiOom3.members  , api.members)
+export { api as apiOom3Cloud }

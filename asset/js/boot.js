@@ -9,13 +9,12 @@ if (! document.body.classList.contains('ffx') ) boot()
 
 function boot () {
 
-    //// Start animating 2 seconds after 'progress' reaches 100%.
+    //// Start animating 1 second after 'progress' reaches 100%.
     if ( $body.classList.contains('oom-progress-100') )
         setTimeout( () => { state.isAnimating = true }, 1000 )
     else
         window.addEventListener('oom-progress-100'
           , () => { setTimeout( () => { state.isAnimating = true }, 1000 ) } )
-
 
     //// Poll for the balloon’s Shadow DOM to be ready. @TODO better than polling?
     new Promise( (resolve, reject) => {
@@ -73,19 +72,22 @@ function boot () {
             else if (0.03 > randSpawn && 30 > $$clouds.length)
                 spawn.clouds(1)
 
-            //// Update clouds and balloons’ locations - they may have crossed a
-            //// boundary on the last frame.
-            resetTargets()
-            updateLocations()
-
-            //// Apply various forces.
-            applyWind(diff)
-            applyMomentum(diff)
-            applyBurner(diff)
-            applyGuards(diff)
-
-            //// Move all clouds and balloons to their new positions.
-            updatePositions()
+            //// Trigger the `tick()` method of any element which needs it.
+            triggerTicks(now)
+            //
+            // //// Update clouds and balloons’ locations - they may have crossed a
+            // //// boundary on the last frame.
+            // resetTargets()
+            // updateLocations()
+            //
+            // //// Apply various forces.
+            // applyWind(diff)
+            // applyMomentum(diff)
+            // applyBurner(diff)
+            // applyGuards(diff)
+            //
+            // //// Move all clouds and balloons to their new positions.
+            // updatePositions()
 
             ////
             // animateGameplay(me, diff)
@@ -101,14 +103,25 @@ function boot () {
 }
 
 
-function resetTargets() {
+//// Triggers the `tick()` method of any element which needs it.
+function triggerTicks (now) {
+    const fn = $el => {
+        const { metabolism, prevTick } = $el.oom.current
+        if ( prevTick + metabolism < now)
+            $el.dispatchEvent( new CustomEvent('tick', { detail:now }) )
+    }
+    $$balloons.map(fn)
+    $$clouds.map(fn)
+}
+
+function resetTargets () {
     const fn = $el => $el.oom.target = Object.assign({}, $el.oom.instance)
     $$balloons.map(fn)
     $$clouds.map(fn)
 }
 
-
-function updateLocations() {
+/*
+function updateLocations () {
     const inBounds = (elX, elZ, locX, locZ) => {
         if (
             (elX > locX)
@@ -143,7 +156,6 @@ function updateLocations() {
     $$balloons.map(fn)
     $$clouds.map(fn)
 }
-
 
 function applyWind (diff) {
     // const
@@ -180,6 +192,7 @@ function updatePositions() {
     $$balloons.map(fn)
     $$clouds.map(fn)
 }
+*/
 
 
 

@@ -1,0 +1,73 @@
+@import '../oom-base/oom-base.css';
+
+/* WRAP */
+.wrap {
+    width: 0; height: 0; top: 0; left: 0;
+    outline: none!important; /* on focus */
+    transform-style: preserve-3d;
+}
+
+/* HITZONE */
+.hitzone {
+    cursor: pointer;
+    z-index: 99;
+}
+.hitzone >* {
+    margin: -2vmin 0 0 -2vmin;
+    border: 2vmin solid transparent;
+}
+
+/* MAIN */
+.main {
+}
+
+/* SILHOUETTE */
+.silhouette {
+    opacity: 0; /* stronger towards the back, for a ‘fog’ effect */
+}
+.silhouette >* {
+    background: var(--fog-color, #808080);
+}
+
+/* SURROUND */
+.surround {
+    z-index: -1;
+}
+.surround >* {
+    transition: box-shadow 0.3s;
+}
+.wrap:hover .surround >*,
+.wrap:focus .surround >* {
+    box-shadow: var(--hover-surround-color, #09f) 0 0 0.5vmin 0.8vmin;
+}
+
+/* GROUND */
+.ground {
+}
+
+/* MARKER */
+.marker {
+    width: 0; height: 0; top: -2vmin; left: -1vmin;
+    border-width: 0;
+    border-top: 2vmin solid transparent;
+    border-left: 1vmin solid transparent;
+    border-right: 1vmin solid transparent;
+}
+
+/* @WARNING As of 20180522 Safari does not support :host-context */
+:host-context(body.oom-dev) .marker.marker-red   { border-top-color: #f00; }
+:host-context(body.oom-dev) .marker.marker-green { border-top-color: #0f0; }
+:host-context(body.oom-dev) .marker.marker-blue  { border-top-color: #00f; }
+/* Firefox    body.oom-dev  .marker.marker-red   { border-top-color: #f00; }
+              body.oom-dev  .marker.marker-green { border-top-color: #0f0; }
+              body.oom-dev  .marker.marker-blue  { border-top-color: #00f; }
+*/
+
+/* SHADOW */
+.shadow {
+    width: 0.4vmin; height: 0.4vmin; top: -0.2vmin; left: -0.2vmin;
+    border-radius: 10vmin;
+    background: var(--shadow-color);
+    box-shadow: var(--shadow-color) 0 0 3vmin 2vmin;
+    transform: rotateX(80deg);
+}

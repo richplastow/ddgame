@@ -24,6 +24,7 @@
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
         perspective: 80vmin;
+        z-index: -99999;
     }
     #clearing {
         position: absolute;
@@ -33,14 +34,15 @@
         box-shadow: #fff3 0 0 5vmin 5vmin;
         transform-origin: center;
         transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
+        z-index: -99998;
     }
 </style>
 
 <!-- Polyfill ‘HTML Imports’ for legacy browsers -->
 <script src="../../asset/js/webcomponents-lite.js"></script>
 
-<!-- Import ‘oom.html’ which will load each <oom-3-*> component -->
-<link rel="import" href="../oom.html">
+<!-- Import ‘oom-all.html’ which will load each <oom-*> component -->
+<link rel="import" href="../oom-all.html">
 
 </head><body class="oom-dev">
 
@@ -60,6 +62,7 @@
 
   <oom-3-balloon x="20" y="0" z="46" title="With no marker"></oom-3-balloon>
   <oom-3-cloud x="20" z="0" weather="fair"></oom-3-cloud>
+  <oom-3-location x="0" z="50" rx="90" windpath="wn"></oom-3-location>
 
 </div>
 
@@ -78,5 +81,28 @@ $('#clearing').addEventListener('click',function(e){
     $el.setAttribute('marker','red,green,blue'.split(',')[~~(Math.random()*3)])
     $('.oom-container').appendChild($el)
 })}</script>
+
+
+<!-- Make sure 'metabolism' and `tick()` are working -->
+<script>{
+// animate()
+function animate (now) {
+    window.requestAnimationFrame(animate)
+    triggerTicks(now)
+}
+
+//// Triggers the `tick()` method of any element which needs it.
+function triggerTicks (now) {
+    const fn = $el => {
+        if (! $el.oom) return
+        const { metabolism, prevTick } = $el.oom.current
+        if ( prevTick + metabolism < now)
+            $el.dispatchEvent( new CustomEvent('tick', { detail:now }) )
+    }
+    // Array.from( document.querySelectorAll('oom-3') ).map(fn)
+    [document.querySelector('oom-3-balloon[upper=purple]')].map(fn)
+}
+
+}</script>
 
 </body></html>

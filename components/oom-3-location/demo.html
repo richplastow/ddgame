@@ -24,15 +24,15 @@
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
         perspective: 80vmin;
-        overflow: hidden;
+        z-index: -100000;
     }
 </style>
 
 <!-- Polyfill ‘HTML Imports’ for legacy browsers -->
 <script src="../../asset/js/webcomponents-lite.js"></script>
 
-<!-- Import ‘oom.html’ which will load each <oom-3-*> component -->
-<link rel="import" href="../oom.html">
+<!-- Import ‘oom-all.html’ which will load each <oom-*> component -->
+<link rel="import" href="../oom-all.html">
 
 </head><body class="oom-dev">
 

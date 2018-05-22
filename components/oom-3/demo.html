@@ -30,7 +30,7 @@
         width: 96vmin;
         height: 96vmin;
         background: #fff3;
-        /* box-shadow: #fff3 0 0 5vmin 5vmin; */
+        box-shadow: #fff3 0 0 5vmin 5vmin;
         transform-origin: center;
         transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
     }
@@ -39,8 +39,8 @@
 <!-- Polyfill ‘HTML Imports’ for legacy browsers -->
 <script src="../../asset/js/webcomponents-lite.js"></script>
 
-<!-- Import ‘oom.html’ which will load each <oom-3-*> component -->
-<link rel="import" href="../oom.html">
+<!-- Import ‘oom-all.html’ which will load each <oom-*> component -->
+<link rel="import" href="../oom-all.html">
 
 </head><body class="oom-dev">
 
@@ -77,5 +77,27 @@ $('#clearing').addEventListener('click',function(e){
     $('.oom-container').appendChild($el)
 })}</script>
 
+
+<!-- Make sure 'metabolism' and `tick()` are working -->
+<script>{
+animate()
+function animate (now) {
+    window.requestAnimationFrame(animate)
+    triggerTicks(now)
+}
+
+//// Triggers the `tick()` method of any element which needs it.
+function triggerTicks (now) {
+    const fn = $el => {
+        if (! $el.oom) return
+        const { metabolism, prevTick } = $el.oom.current
+        if ( prevTick + metabolism < now)
+            $el.dispatchEvent( new CustomEvent('tick', { detail:now }) )
+    }
+    // Array.from( document.querySelectorAll('oom-3') ).map(fn)
+    [document.querySelector('oom-3')].map(fn)
+}
+
+}</script>
 
 </body></html>
