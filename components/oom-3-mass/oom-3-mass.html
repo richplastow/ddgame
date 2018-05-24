@@ -1,0 +1,35 @@
+<!--
+A generic 3D object with mass, which can move and respond to forces.
+1. Define the #oom-3-mass template
+2. Load a JS module defining:
+  - The Oom3Mass class
+  - The <oom-3-mass> custom element
+-->
+
+
+<!-- 1. Define the #oom-3-mass template -->
+<template id="oom-3-mass">
+
+  <!-- <link rel="stylesheet" href="oom-3-mass.css"> -->
+
+  <div class="wrap"><!-- contains the hitzone and main visuals -->
+    <div class="hitzone"></div><!-- invisible, receives clicks etc -->
+    <div class="main"></div><!-- the main visual element -->
+    <div class="silhouette"></div><!-- same as .main but a solid color -->
+    <div class="surround"></div><!-- an outline, to show hover and focus -->
+  </div>
+  <div class="ground"><!-- outside of hitzone, remains at ground-level -->
+    <div class="shadow"></div>
+    <div class="marker"></div><!-- only visible during development -->
+  </div>
+
+</template>
+
+
+<!-- 2. Load a JS module defining the class and custom element -->
+<script type="module" src="./Oom3Mass.js"></script>
+
+<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
+:'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
+,'oom-3-mass/Oom3Mass.js')})))(document,'oom-all.html')</script>

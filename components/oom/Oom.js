@@ -1,7 +1,7 @@
-import { apiOomBase } from './apiOomBase.js'
+import { apiOom } from './apiOom.js'
 
-class OomBase extends HTMLElement {
-    static get api () { return apiOomBase }
+class Oom extends HTMLElement {
+    static get api () { return apiOom }
     static get parent () { return HTMLElement } //@TODO is there a JS built-in ref?
 
     constructor() {
@@ -15,8 +15,13 @@ class OomBase extends HTMLElement {
 
         //// Clone the <template> into a new Shadow DOM.
         this.attachShadow({mode:'open'}).appendChild(
-            this.constructor.$template.content.cloneNode(true)
+            Class.$template.content.cloneNode(true)
         )
+
+        //// Add a CSS <link>.
+        this.shadowRoot.appendChild( Object.assign(
+            document.createElement('link'), { rel:'stylesheet'
+          , href:`${Class.componentsURL}${api.name}/${api.name}.css` }) )
 
         //// All Oom custom elements have an `oom` object.
         ////@TODO maybe add `, initially:{}, target: {}`
@@ -119,61 +124,30 @@ class OomBase extends HTMLElement {
         return Object.keys(members).filter(name => members[name].ATTRIBUTE)
     }
 
+    //// The <link> element which loaded the 'oom-all.html' file.
+    static get $baseLink () {
+        return document.querySelector('link[rel="import"][href$="oom-all.html"]')
+    }
+
+    //// The <link> element which loaded the 'oom.html' file.
+    static get $subLink () {
+        return this.$baseLink.import.querySelector(
+            `link[rel="import"][href$="${this.api.name}.html"]`)
+    }
+
     //// The current class’s <template>. Will be cloned into a new Shadow DOM
     //// by the constructor().
     static get $template () {
-        const
-            { name } = this.api // eg 'oom-foo'
-          , $baseLink = document.querySelector(
-                'link[rel="import"][href$="oom-all.html"]')
-          , $subLink = $baseLink.import.querySelector(
-                `link[rel="import"][href$="${name}.html"]`)
-        return $subLink.import.querySelector('#'+name)
+        return this.$subLink.import.querySelector('#'+this.api.name)
     }
 
-/*
-
-    //// The <style> element of the current class’s <template>.
-    static get $style () {
-        return this.$template.content.querySelector('style')
+    //// Fully qualified URL of the ‘components/’ directory.
+    static get componentsURL () {
+        return this.$baseLink.href.slice(0,-12) // trim trailing 'oom.html'
     }
-
-    //// Implement class-inheritance of CSS.
-    static get fullyInheritedStyle () {
-        let out = ''
-        if (this.parent.$style) out += `
-            /* Begin styles inherited from ${this.parent.api.name} *`+`/
-            ${this.parent.$style.innerHTML}
-            /* End styles inherited from ${this.parent.api.name} *`+`/\n`
-        out += this.$style.innerHTML
-        return out
-    }
-
-    //// Implement class-inheritance of CSS.
-    static get fullyInheritedStyle () {
-        let out = '', suffix = `.style-scope.${this.api.name}`
-        if ('function' === typeof this.parent.maybeScopedStyle) out += `
-            /* Begin styles inherited from ${this.parent.api.name} *`+`/
-            ${this.parent.maybeScopedStyle(suffix)}
-            /* End styles inherited from ${this.parent.api.name} *`+`/\n`
-        out += this.maybeScopedStyle(suffix) // `suffix` is only used if needed
-        return out
-    }
-
-    //// In legacy browsers, suffix <style> element’s selectors to limit scope.
-    static maybeScopedStyle (suffix) {
-        if (-1 === window.navigator.userAgent.indexOf('Firefox') )//@TODO change this after testing in more browsers
-            return this.$style.innerHTML // CSS scoped without help
-
-        return this.$style.innerHTML.replace( // needs suffixes to scope CSS
-            /([^]*?)\s*({[^]*?}|,)/g // stackoverflow.com/a/33236071
-          , `$1${suffix} $2`
-        )
-    }
-*/
 }
 
 //// Define the <oom-base> custom element.
-customElements.define('oom-base', OomBase)
+customElements.define('oom-base', Oom)
 
-export { OomBase }
+export { Oom }

@@ -1,25 +1,25 @@
 <!DOCTYPE HTML><html lang="en-GB">
 <head><meta charset="utf-8">
-<title>Oom3Balloon Demo</title>
+<title>Oom3MassCloud Demo</title>
 
 <style>
     :root {
-        --fog-color: #39a;
-        --hover-surround-color: #cdf;
-        --shadow-color: #0006;
+        --fog-color: #9a3;
+        --hover-surround-color: #dfc;
+        --shadow-color: #906c;
     }
     body {
         margin: 0;
         font: 18px Arial;
-        color: #906;
+        color: var(--fog-color);
     }
     .oom-container {
         position: absolute;
         top: 50%; left: 50%; width: 96vmin; height: 96vmin;
         margin: -48vmin 0 0 -48vmin;
         background: linear-gradient(
-            #9fa, var(--hover-surround-color) 11%,
-            var(--fog-color) 12%, #6ca 75%
+            #fa9, var(--hover-surround-color) 11%,
+            var(--fog-color) 12%, #ca6 75%
         );
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
@@ -49,35 +49,29 @@
 
 <div class="oom-container">
   <div id="clearing"></div>
+  <oom-3 x="10" y="0" z="0" title="Front Left" marker="green"></oom-3>
 
   <!-- Use the component -->
-  <oom-3-balloon x="0"  y="0" z="96" title="Back Left"
-    marker="red" upper="yellow" lower="white"></oom-3-balloon>
-  <oom-3-balloon x="96" y="0" z="96" title="Back Right"
-    marker="green" upper="blue" lower="red"></oom-3-balloon>
-  <oom-3-balloon x="0"  y="0" z="0" title="Front Left"
-    marker="blue" upper="purple" lower="green"></oom-3-balloon>
-  <oom-3-balloon x="96" y="0" z="0" title="Front Right"
-    marker="red" upper="black"></oom-3-balloon>
+  <oom-3-mass-cloud x="0"  y="0" z="96" title="Back Left" marker="red" weather="fair"></oom-3-mass-cloud>
+  <oom-3-mass-cloud x="96" y="0" z="96" title="Back Right" marker="green" weather="storm"></oom-3-mass-cloud>
+  <oom-3-mass-cloud x="0"  y="0" z="0" title="Front Left" marker="none" weather="lightning"></oom-3-mass-cloud>
+  <oom-3-mass-cloud x="96" y="0" z="0" title="Front Right" marker="red"></oom-3-mass-cloud>
 
-  <oom-3-balloon x="20" y="0" z="46" title="With no marker"></oom-3-balloon>
-  <oom-3-cloud x="20" z="0" weather="fair"></oom-3-cloud>
-  <oom-3-location x="0" z="50" rx="90" windpath="wn"></oom-3-location>
+  <oom-3-mass-cloud x="5"  y="0" z="5" title="With no marker" weather="storm"></oom-3-mass-cloud>
 
 </div>
 
 <h1 style="position:absolute; width:100%; text-align:center; z-index:99">
-  Oom3Balloon Demo
+  Oom3MassCloud Demo
 </h1>
 
 <script>{
 const d=document, $=d.querySelector.bind(d)
 $('#clearing').addEventListener('click',function(e){
-    $el=d.createElement('oom-3-balloon')
+    $el=d.createElement('oom-3-mass-cloud')
     $el.setAttribute( 'x', Math.random()*100 )
     $el.setAttribute( 'z', Math.random()*100 )
-    $el.setAttribute('upper','yellow,white,blue,red,purple,green,black'.split(',')[~~(Math.random()*7)])
-    $el.setAttribute('lower','yellow,white,blue,red,purple,green,black'.split(',')[~~(Math.random()*7)])
+    $el.setAttribute('weather','fair,storm,lightning'.split(',')[~~(Math.random()*3)])
     $el.setAttribute('marker','red,green,blue'.split(',')[~~(Math.random()*3)])
     $('.oom-container').appendChild($el)
 })}</script>
@@ -100,7 +94,7 @@ function triggerTicks (now) {
             $el.dispatchEvent( new CustomEvent('tick', { detail:now }) )
     }
     // Array.from( document.querySelectorAll('oom-3') ).map(fn)
-    [document.querySelector('oom-3-balloon[upper=purple]')].map(fn)
+    [document.querySelector('oom-3-mass-cloud[weather=lightning]')].map(fn)
 }
 
 }</script>

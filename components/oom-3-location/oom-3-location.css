@@ -1,13 +1,8 @@
 @import '../oom-3/oom-3.css';
 
-/* GENERAL */
-.silhouette, .surround, .ground {
-    display: none;
-}
-
 /* WRAP */
 .wrap {
-    width: 96vmin; height: 96vmin; top: 0; left: 0;
+    width: 96vmin; height: 96vmin;
     z-index: -99999!important;
 }
 

@@ -1,5 +1,5 @@
 <!--
-A generic 3D container, which all visible 3D objects should extend.
+A generic 3D container, which all visible 3D elements should extend.
 1. Define the #oom-3 template
 2. Load a JS module defining:
   - The Oom3 class
@@ -11,17 +11,10 @@ A generic 3D container, which all visible 3D objects should extend.
 <template id="oom-3">
 
   <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
-  <link rel="stylesheet" href="components/oom-3/oom-3.css">
+  <!-- <link rel="stylesheet" href="components/oom-3/oom-3.css"> -->
 
-  <div class="wrap"><!-- contains the hitzone and main visuals -->
-    <div class="hitzone"></div><!-- invisible, receives clicks etc -->
+  <div class="wrap"><!-- contains the main visuals -->
     <div class="main"></div><!-- the main visual element -->
-    <div class="silhouette"></div><!-- same as .main but a solid color -->
-    <div class="surround"></div><!-- an outline, to show hover and focus -->
-  </div>
-  <div class="ground"><!-- outside of hitzone, remains at ground-level -->
-    <div class="shadow"></div>
-    <div class="marker"></div><!-- only visible during development -->
   </div>
 
 </template>

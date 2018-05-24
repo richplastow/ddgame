@@ -1,30 +1,29 @@
 <!DOCTYPE HTML><html lang="en-GB">
 <head><meta charset="utf-8">
-<title>Oom3Cloud Demo</title>
+<title>Oom3Mass Demo</title>
 
 <style>
     :root {
-        --fog-color: #9a3;
-        --hover-surround-color: #dfc;
-        --shadow-color: #906c;
+        --fog-color: #678;
+        --hover-surround-color: #def;
+        --shadow-color: #0006;
     }
     body {
         margin: 0;
         font: 18px Arial;
-        color: #906;
+        color: var(--fog-color);
     }
     .oom-container {
         position: absolute;
         top: 50%; left: 50%; width: 96vmin; height: 96vmin;
         margin: -48vmin 0 0 -48vmin;
         background: linear-gradient(
-            #fa9, var(--hover-surround-color) 11%,
-            var(--fog-color) 12%, #ca6 75%
+            #89a, var(--hover-surround-color) 11%,
+            var(--fog-color) 12%, #543 75%
         );
         border-radius: 2vmin;
         perspective-origin: 50% -10%;
         perspective: 80vmin;
-        z-index: -99999;
     }
     #clearing {
         position: absolute;
@@ -34,7 +33,6 @@
         box-shadow: #fff3 0 0 5vmin 5vmin;
         transform-origin: center;
         transform: translate3d(0,24vmin,-48vmin) rotateX(90deg);
-        z-index: -99998;
     }
 </style>
 
@@ -49,29 +47,32 @@
 
 <div class="oom-container">
   <div id="clearing"></div>
-  <oom-3 x="10" y="0" z="0" title="Front Left" marker="green"></oom-3>
 
   <!-- Use the component -->
-  <oom-3-cloud x="0"  y="0" z="96" title="Back Left" marker="red" weather="fair"></oom-3-cloud>
-  <oom-3-cloud x="96" y="0" z="96" title="Back Right" marker="green" weather="storm"></oom-3-cloud>
-  <oom-3-cloud x="0"  y="0" z="0" title="Front Left" marker="none" weather="lightning"></oom-3-cloud>
-  <oom-3-cloud x="96" y="0" z="0" title="Front Right" marker="red"></oom-3-cloud>
+  <oom-3-mass x="44" y="0" z="10" title="Front and center" marker="blue"></oom-3-mass>
 
-  <oom-3-cloud x="5"  y="0" z="5" title="With no marker" weather="storm"></oom-3-cloud>
+  <oom-3-mass x="0"  y="0" z="96" title="Back Left" marker="green"></oom-3-mass>
+  <oom-3-mass x="96" y="0" z="96" title="Back Right" marker="green"></oom-3-mass>
+  <oom-3-mass x="0"  y="0" z="0" title="Front Left" marker="blue"></oom-3-mass>
+  <oom-3-mass x="96" y="0" z="0" title="Front Right" marker="red"></oom-3-mass>
+
+  <oom-3-mass x="90" y="0" z="0" title="Invalid marker attribute" marker="invalid"></oom-3-mass>
+  <oom-3-mass x="92" y="0" z="0" title="marker is 'none'" marker="none"></oom-3-mass>
+  <oom-3-mass x="94" y="0" z="0" title="No marker attribute"></oom-3-mass>
 
 </div>
 
+
 <h1 style="position:absolute; width:100%; text-align:center; z-index:99">
-  Oom3Cloud Demo
+  Oom3Mass Demo
 </h1>
 
 <script>{
 const d=document, $=d.querySelector.bind(d)
 $('#clearing').addEventListener('click',function(e){
-    $el=d.createElement('oom-3-cloud')
+    $el=d.createElement('oom-3-mass')
     $el.setAttribute( 'x', Math.random()*100 )
     $el.setAttribute( 'z', Math.random()*100 )
-    $el.setAttribute('weather','fair,storm,lightning'.split(',')[~~(Math.random()*3)])
     $el.setAttribute('marker','red,green,blue'.split(',')[~~(Math.random()*3)])
     $('.oom-container').appendChild($el)
 })}</script>
@@ -93,8 +94,8 @@ function triggerTicks (now) {
         if ( prevTick + metabolism < now)
             $el.dispatchEvent( new CustomEvent('tick', { detail:now }) )
     }
-    // Array.from( document.querySelectorAll('oom-3') ).map(fn)
-    [document.querySelector('oom-3-cloud[weather=lightning]')].map(fn)
+    // Array.from( document.querySelectorAll('oom-3-mass') ).map(fn)
+    [document.querySelector('oom-3-mass')].map(fn)
 }
 
 }</script>

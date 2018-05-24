@@ -1,5 +1,5 @@
 import { progress } from '../../asset/js/progress.js'
-progress('components/oom-3-location/wind.js')
+progress('components/oom-3-location/vectorAtPoint.js')
 
 
 

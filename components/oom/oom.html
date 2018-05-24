@@ -1,17 +1,17 @@
 <!--
 The base Oom custom element, which all others extend.
-1. Define the #oom-base template
+1. Define the #oom template
 2. Load a JS module defining:
-  - The OomBase class
+  - The Oom class
   - The <oom-base> custom element
 -->
 
 
-<!-- 1. Define the #oom-base template -->
-<template id="oom-base">
+<!-- 1. Define the #oom template -->
+<template id="oom">
 
   <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
-  <link rel="stylesheet" href="components/oom-base/oom-base.css">
+  <!-- <link rel="stylesheet" href="components/oom/oom.css"> -->
 
   <div class="wrap"><!-- contains the main visuals -->
     <div class="main"></div><!-- the main visual element -->
@@ -21,9 +21,9 @@ The base Oom custom element, which all others extend.
 
 
 <!-- 2. Load a JS module defining the class and custom element -->
-<script type="module" src="./OomBase.js"></script>
+<script type="module" src="./Oom.js"></script>
 
 <!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-base/OomBase.js')})))(document,'oom-all.html')</script>
+,'oom/Oom.js')})))(document,'oom-all.html')</script>

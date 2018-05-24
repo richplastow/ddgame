@@ -1,9 +1,9 @@
 //// Tell the progress-bar that this file has loaded.
 import { progress } from '../../asset/js/progress.js'
-progress('components/oom-3/apiOom3Balloon.js')
+progress('components/oom-3-mass-balloon/apiOom3MassBalloon.js')
 
 //// Import the super-class’s API and the Oom toolkit.
-import { apiOom3 } from '../oom-3/apiOom3.js'
+import { apiOom3Mass } from '../oom-3-mass/apiOom3Mass.js'
 import { parse, update, constant } from '../oom-kit.js'
 const { Enum } = parse, { ATTRIBUTE } = constant
 
@@ -22,7 +22,7 @@ const upperLowerConfig = { Enum, ATTRIBUTE
 
 //// Define the API.
 const api = {
-    name: 'oom-3-balloon'
+    name: 'oom-3-mass-balloon'
   , elements: {}
   , listeners: {}
   , members: {
@@ -32,7 +32,7 @@ const api = {
 }
 
 //// Merge with the super-class’s API, and export.
-api.elements  = Object.assign({}, apiOom3.elements , api.elements)
-api.listeners = Object.assign({}, apiOom3.listeners, api.listeners)
-api.members   = Object.assign({}, apiOom3.members  , api.members)
-export { api as apiOom3Balloon }
+api.elements  = Object.assign({}, apiOom3Mass.elements , api.elements)
+api.listeners = Object.assign({}, apiOom3Mass.listeners, api.listeners)
+api.members   = Object.assign({}, apiOom3Mass.members  , api.members)
+export { api as apiOom3MassBalloon }

@@ -1,41 +1,50 @@
+//// Tell the progress-bar that this file has loaded.
 import { progress } from '../../asset/js/progress.js'
-progress('components/oom-3/apiOom3Location.js')
+progress('components/oom-3-location/apiOom3Location.js')
 
+//// Import the super-class’s API and the Oom toolkit.
+import { apiOom3 } from '../oom-3/apiOom3.js'
 import { parse, update, constant } from '../oom-kit.js'
-const { Enum, Vector } = parse
-const { ATTRIBUTE } = constant
+const { Enum } = parse, { ATTRIBUTE } = constant
 
+//// Import special functionality.
 import { vectorAtPoint } from './vectorAtPoint.js'
 
-import { apiOom3 } from '../oom-3/apiOom3.js'
+//// Define the API.
+const api = {
+    name: 'oom-3-location'
+  , elements: {}
+  , listeners: {}
+  , members: {
 
-const apiOom3Location = { name:'oom-3-location' }
+        //// Attributes.
+        windpath: { Enum, ATTRIBUTE
+          , valid: 'none cyclone anticyclone ns sn ew we ne en es se sw ws wn nw'
+          , updaters: update.enum('wrap')
+        }
 
-//// Merge <oom-3> elements into <oom-3-location> elements.
-apiOom3Location.elements = Object.assign({}, apiOom3.elements, {
-})
+        //// Attribute updater handlers.
+      , updateXYZ // override `updateXYZ()` defined in <oom-3>
 
-//// Merge <oom-3> members into <oom-3-location> members.
-apiOom3Location.members = Object.assign({}, apiOom3.members, {
-    windpath: { Enum, ATTRIBUTE
-      , valid: 'none cyclone anticyclone ns sn ew we ne en es se sw ws wn nw'
-      , updaters: update.enum('wrap')
+        //// Other methods.
+      , vectorAtPoint
+
     }
-  , vectorAtPoint
-})
-
-//// Merge <oom-3> listeners into <oom-3-location> listeners.
-apiOom3Location.listeners = Object.assign({}, apiOom3.listeners, {
-})
-
-
-function onXYZRXChange (evt) {
-    const { x, y, z, rx } = this.oom.current
-    this.oom.$.wrap.style.transform =
-        `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin) rotateX(${rx}deg)`
-    this.oom.$.ground.style.transform =
-        `translate3d(${x}vmin, 72vmin, ${-z}vmin)`
 }
 
+//// Merge with the super-class’s API, and export.
+api.elements  = Object.assign({}, apiOom3.elements , api.elements)
+api.listeners = Object.assign({}, apiOom3.listeners, api.listeners)
+api.members   = Object.assign({}, apiOom3.members  , api.members)
+export { api as apiOom3Location }
 
-export { apiOom3Location }
+
+
+
+//// ATTRIBUTE-UPDATE HANDLERS
+
+function updateXYZ (evt) {
+    const { x, y, z } = this.oom.current
+    this.oom.$.wrap.style.transform =
+        `translate3d(${x}vmin, ${y+72}vmin, ${-z}vmin) rotateX(90deg)`
+}

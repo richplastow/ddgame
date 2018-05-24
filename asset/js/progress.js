@@ -2,7 +2,7 @@
 //// the progress bar reaches 100%. Also, throws an exception if more modules
 //// than expected load.
 
-const paths = {}, expected = 12
+const paths = {}, expected = 13
 let remaining = expected
 let $inner
 createEl()

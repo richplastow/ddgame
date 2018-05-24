@@ -16,7 +16,7 @@ function spawnElements (tally, tag, arr, setRandomElementAttributes) {
         $scene
 
     for (let i=0; i<tally; i++) {
-        const $el = document.createElement(tag) // eg 'oom-3-cloud'
+        const $el = document.createElement(tag) // eg 'oom-3-mass-cloud'
         $el.setAttribute('x', Math.random() * 500 - 200 ) // -200 to 300
         $el.setAttribute('z', Math.random() * 300 ) // 0 to 300
         setRandomElementAttributes($el)
@@ -45,11 +45,11 @@ function setRandomBalloonAttributes ($el) {
 }
 
 spawn.clouds = function (tally=1) {
-    spawnElements(tally, 'oom-3-cloud', $$clouds, setRandomCloudAttributes)
+    spawnElements(tally, 'oom-3-mass-cloud', $$clouds, setRandomCloudAttributes)
 }
 
 spawn.balloons = function (tally=1) {
-    spawnElements(tally, 'oom-3-balloon', $$balloons, setRandomBalloonAttributes)
+    spawnElements(tally, 'oom-3-mass-balloon', $$balloons, setRandomBalloonAttributes)
 }
 
 
