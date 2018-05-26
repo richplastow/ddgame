@@ -1,4 +1,4 @@
-import { progress } from '../asset/js/progress.js'
+import progress from '../asset/js/progress.js'
 progress('components/oom-kit.js')
 
 
@@ -110,5 +110,7 @@ geometry.inside = (px, py, pz, bx, by, bz, bw, bh, bd) => {
 //// CONSTANT
 
 constant.ATTRIBUTE = 'ATTRIBUTE'
+constant.STATIC = 'STATIC'
+
 
 export { $, $$, parse, update, clamp, vector, geometry, constant }

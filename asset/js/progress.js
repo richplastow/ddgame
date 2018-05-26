@@ -45,7 +45,7 @@ body.oom-progress-100 .oom-progress {
 
 
 //// The exported function. Also acts as a namespace for `progress.percent`.
-function progress (path) {
+export default function progress (path) {
 
     //// Record the path of the module which loaded.
     paths[path] = paths[path] || 0
@@ -73,6 +73,3 @@ function progress (path) {
         console.error(`${-remaining} too many assets have loaded!`)
 
 }
-
-
-export { progress }

@@ -10,9 +10,6 @@ A generic 3D container, which all visible 3D elements should extend.
 <!-- 1. Define the #oom-3 template -->
 <template id="oom-3">
 
-  <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
-  <!-- <link rel="stylesheet" href="components/oom-3/oom-3.css"> -->
-
   <div class="wrap"><!-- contains the main visuals -->
     <div class="main"></div><!-- the main visual element -->
   </div>
@@ -21,9 +18,9 @@ A generic 3D container, which all visible 3D elements should extend.
 
 
 <!-- 2. Load a JS module defining the class and custom element -->
-<script type="module" src="./Oom3.js"></script>
+<script type="module" src="./oom-3.js"></script>
 
-<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<!-- Redo 2. for browsers without native ‘HTML Imports’ support, eg Safari -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-3/Oom3.js')})))(document,'oom-all.html')</script>
+,'oom-3/oom-3.js')})))(document,'oom-all.html')</script>

@@ -10,9 +10,6 @@ A fluffy cloud, to hide your balloon behind.
 <!-- 1. Define the #oom-3-mass-cloud template -->
 <template id="oom-3-mass-cloud">
 
-  <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
-  <!-- <link rel="stylesheet" href="components/oom-3-mass-cloud/oom-3-mass-cloud.css"> -->
-
   <div class="wrap" tabindex="1">
     <div class="hitzone">
       <div class="left blob"></div>
@@ -44,9 +41,9 @@ A fluffy cloud, to hide your balloon behind.
 
 
 <!-- 2. Load a JS module defining the class and custom element -->
-<script type="module" src="./Oom3MassCloud.js"></script>
+<script type="module" src="./oom-3-mass-cloud.js"></script>
 
-<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<!-- Redo 2. for browsers without native ‘HTML Imports’ support, eg Safari -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-3-mass-cloud/Oom3MassCloud.js')})))(document,'oom-all.html')</script>
+,'oom-3-mass-cloud/oom-3-mass-cloud.js')})))(document,'oom-all.html')</script>

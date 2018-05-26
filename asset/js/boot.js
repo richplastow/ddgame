@@ -1,5 +1,5 @@
 //@TODO import config from './config.js'
-import { progress } from './progress.js'; progress('asset/js/boot.js')
+import progress from './progress.js'; progress('asset/js/boot.js')
 import { state } from './state.js'
 import { spawn } from './spawn.js'
 import { $body, $me, $scene, $$locations, $$balloons, $$clouds } from './elements.js'

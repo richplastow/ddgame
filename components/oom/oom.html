@@ -10,9 +10,6 @@ The base Oom custom element, which all others extend.
 <!-- 1. Define the #oom template -->
 <template id="oom">
 
-  <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
-  <!-- <link rel="stylesheet" href="components/oom/oom.css"> -->
-
   <div class="wrap"><!-- contains the main visuals -->
     <div class="main"></div><!-- the main visual element -->
   </div>
@@ -21,9 +18,9 @@ The base Oom custom element, which all others extend.
 
 
 <!-- 2. Load a JS module defining the class and custom element -->
-<script type="module" src="./Oom.js"></script>
+<script type="module" src="./oom.js"></script>
 
-<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<!-- Redo 2. for browsers without native ‘HTML Imports’ support, eg Safari -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom/Oom.js')})))(document,'oom-all.html')</script>
+,'oom/oom.js')})))(document,'oom-all.html')</script>

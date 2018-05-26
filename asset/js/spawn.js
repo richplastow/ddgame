@@ -1,4 +1,4 @@
-import { progress } from './progress.js'; progress('asset/js/spawn.js')
+import progress from './progress.js'; progress('asset/js/spawn.js')
 import { $$clouds, $$balloons, $scene } from './elements.js'
 
 const spawn = { }
@@ -41,7 +41,6 @@ function setRandomBalloonAttributes ($el) {
       , lower = colors[ ~~(Math.random() * colors.length) ]
     $el.setAttribute('upper', upper)
     $el.setAttribute('lower', lower) // one in 20
-    console.log(upper, lower);
 }
 
 spawn.clouds = function (tally=1) {

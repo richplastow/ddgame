@@ -10,9 +10,6 @@ A hot air balloon, to play hide and seek with.
 <!-- 1. Define the #oom-3-mass-balloon template -->
 <template id="oom-3-mass-balloon">
 
-  <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
-  <!-- <link rel="stylesheet" href="components/oom-3-mass-balloon/oom-3-mass-balloon.css"> -->
-
   <div class="wrap" tabindex="1">
     <div class="hitzone">
       <div class="upper canopy"></div>
@@ -44,9 +41,9 @@ A hot air balloon, to play hide and seek with.
 
 
 <!-- 2. Load a JS module defining the class and custom element -->
-<script type="module" src="./Oom3MassBalloon.js"></script>
+<script type="module" src="./oom-3-mass-balloon.js"></script>
 
-<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<!-- Redo 2. for browsers without native ‘HTML Imports’ support, eg Safari -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-3-mass-balloon/Oom3MassBalloon.js')})))(document,'oom-all.html')</script>
+,'oom-3-mass-balloon/oom-3-mass-balloon.js')})))(document,'oom-all.html')</script>

@@ -1,4 +1,4 @@
-import { progress } from './progress.js'; progress('asset/js/elements.js')
+import progress from './progress.js'; progress('asset/js/elements.js')
 import { spawn } from './spawn.js'
 
 const

@@ -1,4 +1,4 @@
-import { progress } from '../../asset/js/progress.js'
+import progress from '../../asset/js/progress.js'
 progress('components/oom-3-location/vectorAtPoint.js')
 
 
@@ -284,7 +284,7 @@ const vectorFns = {
 
 
 //// `ex`, `ey` and `ez` are the entity’s absolute position.
-function vectorAtPoint (diff, ex, ey, ez) {
+export default function vectorAtPoint (diff, ex, ey, ez) {
 // diff *= 4
     const
         { x:lx, y:ly, z:lz, windpath } = this.oom.current
@@ -302,6 +302,3 @@ function vectorAtPoint (diff, ex, ey, ez) {
     return { vx:vx*diff, vy:0, vz:vz*diff }
     // return { vx:0.01, vy:0, vz:0.02}
 }
-
-
-export { vectorAtPoint }

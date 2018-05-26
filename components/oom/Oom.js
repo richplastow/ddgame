@@ -1,16 +1,15 @@
-import { apiOom } from './apiOom.js'
+const parentApi = { Class: window.HTMLElement } // a native object
 
-class Oom extends HTMLElement {
-    static get api () { return apiOom }
-    static get parent () { return HTMLElement } //@TODO is there a JS built-in ref?
+//// Define the base class.
+const Class = class Oom extends parentApi.Class {
 
-    constructor() {
+    constructor () {
 
-        //// Call HTMLElement’s constructor(). Then we can reference `this`.
+        //// Call the super-class’s constructor(). Then we can reference `this`.
         super()
         const
             Class = this.constructor
-          , api = Class.api
+          , api = Class.OOM.api
           , { elements, members, listeners } = api
 
         //// Clone the <template> into a new Shadow DOM.
@@ -21,9 +20,9 @@ class Oom extends HTMLElement {
         //// Add a CSS <link>.
         this.shadowRoot.appendChild( Object.assign(
             document.createElement('link'), { rel:'stylesheet'
-          , href:`${Class.componentsURL}${api.name}/${api.name}.css` }) )
+          , href:`${Class.componentsURL}${api.tag}/${api.tag}.css` }) )
 
-        //// All Oom custom elements have an `oom` object.
+        //// All Oom custom-element instances have an `oom` property.
         ////@TODO maybe add `, initially:{}, target: {}`
         this.oom = { api, Class, $:{}, current:{} }
 
@@ -42,10 +41,18 @@ class Oom extends HTMLElement {
 
         //// Record default non-attribute properties into `this.oom.current`.
         for ( const [name, member] of Object.entries(members) )
-            if (! member.ATTRIBUTE && ! member.bind)
+            if (! member.ATTRIBUTE && ! member.STATIC && ! member.bind)
                 for ( const [key, value] of Object.entries(member) )
                     if (value.bind && 'updaters' !== key && null !==
                         (this.oom.current[name] = value.bind(this)(null, name))
+                    ) break
+
+        //// Record default static properties into `Class`.
+        for ( const [name, member] of Object.entries(members) )
+            if (member.STATIC)
+                for ( const [key, value] of Object.entries(member) )
+                    if (null == Class[name] && value.bind && 'updaters' !== key
+                        && null !== (Class[name] = value.bind(this)(null, name))
                     ) break
 
         //// Bind attribute-updaters defined as a single function.
@@ -97,7 +104,7 @@ class Oom extends HTMLElement {
     //// Oom tries every function that’s not an updater.
     //// Used by `constructor()` and `attributeChangedCallback()`.
     parseAttribute (attrName) {
-        const member = this.constructor.api.members[attrName]
+        const member = this.constructor.OOM.api.members[attrName]
         let parsed = null
         for ( const [key, value] of Object.entries(member) )
             if (value.bind && 'updaters' !== key && null !==
@@ -120,7 +127,7 @@ class Oom extends HTMLElement {
 
     //// Observe the attributes, to make attributeChangedCallback() work.
     static get observedAttributes () {
-        const { members } = this.api
+        const { members } = this.OOM.api
         return Object.keys(members).filter(name => members[name].ATTRIBUTE)
     }
 
@@ -132,22 +139,51 @@ class Oom extends HTMLElement {
     //// The <link> element which loaded the 'oom.html' file.
     static get $subLink () {
         return this.$baseLink.import.querySelector(
-            `link[rel="import"][href$="${this.api.name}.html"]`)
+            `link[rel="import"][href$="${this.OOM.api.tag}.html"]`)
     }
 
     //// The current class’s <template>. Will be cloned into a new Shadow DOM
     //// by the constructor().
     static get $template () {
-        return this.$subLink.import.querySelector('#'+this.api.name)
+        return this.$subLink.import.querySelector('#'+this.OOM.api.tag)
     }
 
     //// Fully qualified URL of the ‘components/’ directory.
     static get componentsURL () {
         return this.$baseLink.href.slice(0,-12) // trim trailing 'oom.html'
     }
+
+    //// Creates the `OOM` namespace on a newly defined class, and records the
+    //// class’s `OOM.api` and `OOM.parent` properties. Also defines the custom
+    //// DOM element - eg `OomFooBar` would define <oom-foo-bar>.
+    static oomInit (api) {
+        this.OOM = { api }
+        customElements.define('oom' === api.tag ? 'oom-base' : api.tag, this)
+    } // note that <oom> would not be valid, so we use <oom-base> instead
 }
 
-//// Define the <oom-base> custom element.
-customElements.define('oom-base', Oom)
+//// Define the API.
+const api = {
+    Class
+  , title: 'Oom'
+  , tag: 'oom'
+  , parentApi
+  , elements: {
+        wrap: { selector:'.wrap' }
+      , main: { selector:'.main' }
+    }
+  , listeners: {}
+  , members: {}
+}
 
-export { Oom }
+
+
+
+//// BOILERPLATE
+
+//// Define the class’s custom element, and create its static `OOM` namespace.
+api.Class.oomInit(api)
+
+//// Finally, tell the progress-bar this file has loaded, and export the API.
+import progress from '../../asset/js/progress.js'; progress(api.tag)
+export default api

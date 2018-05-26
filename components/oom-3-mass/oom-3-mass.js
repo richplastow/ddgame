@@ -1,15 +1,13 @@
-//// Tell the progress-bar that this file has loaded.
-import { progress } from '../../asset/js/progress.js'
-progress('components/oom-3-mass/apiOom3Mass.js')
-
-//// Import the super-class’s API and the Oom toolkit.
-import { apiOom3 } from '../oom-3/apiOom3.js'
-import { $$, parse, update, clamp, vector, geometry, constant } from '../oom-kit.js'
+import parentApi from '../oom-3/oom-3.js'
+import { $$, parse, constant, update, clamp, vector, geometry } from '../oom-kit.js'
 const { Enum, Vector } = parse, { ATTRIBUTE } = constant
 
-//// Define the API.
+//// Define the API, including the class.
 const api = {
-    name: 'oom-3-mass'
+    Class: class Oom3Location extends parentApi.Class {}
+  , title: 'Oom3Mass'
+  , tag: 'oom-3-mass'
+  , parentApi
   , elements: {
         hitzone:    { selector:'.hitzone' }
       , silhouette: { selector:'.silhouette' }
@@ -43,15 +41,10 @@ const api = {
 
         //// Other methods.
       , updateLocation
+      , updateVisibility
 
     }
 }
-
-//// Merge with the super-class’s API, and export.
-api.elements  = Object.assign({}, apiOom3.elements , api.elements)
-api.listeners = Object.assign({}, apiOom3.listeners, api.listeners)
-api.members   = Object.assign({}, apiOom3.members  , api.members)
-export { api as apiOom3Mass }
 
 
 
@@ -86,7 +79,7 @@ function updateLocation () {
       , { x:lx, y:ly, z:lz } = $location ? $location.oom.current
           : { x:9e9, y:9e9, z:9e9 } // rarely, the entity is not in a location
 
-    //// Usually, an element is still in the same location as before.
+    //// Usually, a mass is still in the same location as before.
     if ( geometry.inside(x, y, z, lx, ly, lz, 100, 100, 100) ) return
 
     //// Otherwise, search for the location. @TODO deal with overlapping locations
@@ -120,6 +113,18 @@ function updateLocation () {
 }
 
 
+//// Deletes, hides, or (if it was previously hidden) shows the mass, depending
+//// on its distance to the camera.
+function updateVisibility () {
+    const
+        { deleteDistance, hideDistance } = this.oom.Class
+      , cameraDistance = 123
+
+    //// Delete the mass if it’s too far from the camera.
+    if ('me' === this.id) console.log(deleteDistance, cameraDistance)
+}
+
+
 
 
 //// PARSERS
@@ -127,7 +132,8 @@ function updateLocation () {
 //// Does the same job as `parse.number()`, but defaults to a random integer
 //// between 20 and 30 if `value` is falsey.
 function Metabolism (value) {
-    return +value || ~~(Math.random() * 20 + 10)
+    // return +value || ~~(Math.random() * 20 + 10)
+    return +value || ~~(Math.random() * 200 + 1000)
 }
 
 function Location (value) { //@TODO parse properly
@@ -190,6 +196,27 @@ function onTick (evt) {
     this.setAttribute('y', y + vy)
     this.setAttribute('z', z + vz)
 
-    //// The element may have changed locations, or may not be in any location.
+    //// The mass may have changed locations, or may not be in any location.
     this.oom.updateLocation()
+
+    //// Depending on its new distance from the camera, the mass may need to be
+    //// deleted, hidden, or (if it was previously hidden) shown.
+    this.oom.updateVisibility()
 }
+
+
+
+
+//// BOILERPLATE
+
+//// Merge with the super-class’s API.
+api.elements  = Object.assign({}, parentApi.elements , api.elements)
+api.listeners = Object.assign({}, parentApi.listeners, api.listeners)
+api.members   = Object.assign({}, parentApi.members  , api.members)
+
+//// Define the class’s custom element, and create its static `OOM` namespace.
+api.Class.oomInit(api)
+
+//// Finally, tell the progress-bar this file has loaded, and export the API.
+import progress from '../../asset/js/progress.js'; progress(api.tag)
+export default api

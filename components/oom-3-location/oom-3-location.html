@@ -10,9 +10,6 @@ A gameplay area, usually containing a prevailing wind.
 <!-- 1. Define the #oom-3-location template -->
 <template id="oom-3-location">
 
-  <!-- Oom styles use the same inheritance hierarchy as the Oom classes -->
-  <!-- <link rel="stylesheet" href="components/oom-3-location/oom-3-location.css"> -->
-
   <div class="wrap">
     <div class="main">
       <div class="mid"></div>
@@ -27,9 +24,9 @@ A gameplay area, usually containing a prevailing wind.
 
 
 <!-- 2. Load a JS module defining the class and custom element -->
-<script type="module" src="./Oom3Location.js"></script>
+<script type="module" src="./oom-3-location.js"></script>
 
-<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<!-- Redo 2. for browsers without native ‘HTML Imports’ support, eg Safari -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-3-location/Oom3Location.js')})))(document,'oom-all.html')</script>
+,'oom-3-location/oom-3-location.js')})))(document,'oom-all.html')</script>

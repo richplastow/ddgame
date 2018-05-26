@@ -10,8 +10,6 @@ A generic 3D object with mass, which can move and respond to forces.
 <!-- 1. Define the #oom-3-mass template -->
 <template id="oom-3-mass">
 
-  <!-- <link rel="stylesheet" href="oom-3-mass.css"> -->
-
   <div class="wrap"><!-- contains the hitzone and main visuals -->
     <div class="hitzone"></div><!-- invisible, receives clicks etc -->
     <div class="main"></div><!-- the main visual element -->
@@ -27,9 +25,9 @@ A generic 3D object with mass, which can move and respond to forces.
 
 
 <!-- 2. Load a JS module defining the class and custom element -->
-<script type="module" src="./Oom3Mass.js"></script>
+<script type="module" src="./oom-3-mass.js"></script>
 
-<!-- Redo the line above for browsers without native ‘HTML Imports’ support -->
+<!-- Redo 2. for browsers without native ‘HTML Imports’ support, eg Safari -->
 <script>((d,f)=>d.head.appendChild(Object.assign(d.createElement('script'),{type
 :'module',src:d.querySelector(`link[rel="import"][href$="${f}"]`).href.replace(f
-,'oom-3-mass/Oom3Mass.js')})))(document,'oom-all.html')</script>
+,'oom-3-mass/oom-3-mass.js')})))(document,'oom-all.html')</script>
